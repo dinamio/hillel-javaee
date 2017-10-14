@@ -20,7 +20,6 @@ public class FizzBuzzTest {
     private static void printValues(int from, int to) {
         IntStream.rangeClosed(from, to)
                 .mapToObj(FizzBuzzTest::getComputationString)
-                .filter(str -> !str.isEmpty())
                 .forEach(System.out::println);
     }
 
@@ -30,7 +29,7 @@ public class FizzBuzzTest {
                 .filter(key -> i % key == 0)
                 .map(participantHolder::get)
                 .forEach(result::append);
-        return (result.length() == 0) || i == 0 ? "" : i + ": " + result;
+        return (result.length() == 0 || i == 0) ? ("" + i) : result.toString();
     }
 
 }
