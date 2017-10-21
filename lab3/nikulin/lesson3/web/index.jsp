@@ -9,7 +9,7 @@
 <html>
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-  <title>Plugin tester</title>
+  <title>Books</title>
 </head>
 
 <body>
