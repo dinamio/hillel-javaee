@@ -9,6 +9,6 @@ public class Book {
     private String author;
     private String publisher;
     public String toString(){
-        return id + " " + name + " " + author + " " + publisher;
+        return id + " " + name + " " + author + " " + publisher + "\n";
     }
 }

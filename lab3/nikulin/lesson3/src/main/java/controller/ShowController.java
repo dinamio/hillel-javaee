@@ -6,14 +6,18 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.logging.Level;
 
-@WebServlet("/books")
-public class Controller extends HttpServlet {
+@WebServlet("/books/show")
+public class ShowController extends HttpServlet {
+
+    private java.util.logging.Logger logger = Logger.getInstance();
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        if (req.getParameter("signIn") != null){
-            resp.sendRedirect("books/menu.jsp");
+        if (req.getParameter("back") != null){
+            resp.sendRedirect("menu.jsp");
+            logger.log(Level.INFO,"Books was shown");
         }
     }
 }
