@@ -13,5 +13,18 @@
 <body>
 <form action="${pageContext.request.contextPath}/books" method="POST">
     <h1 colspan="2"><input type="submit" name="signIn" value="Sign In"></h1>
+    <h1 colspan="2"><input type="submit" name="signUp" value="Sign Up"></h1>
+    <table>
+        <tr>
+            <td><b>login </b></td>
+            <td><input type="text" name="login"
+                       value="admin" size="70"/></td>
+        </tr>
+        <tr>
+            <td><b>password </b></td>
+            <td><input type = "text" name = "password"
+                       value = "admin" size = "70"/></td>
+        </tr>
+    </table>
 </body>
 </html>

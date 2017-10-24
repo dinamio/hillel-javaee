@@ -16,5 +16,6 @@
     <h1 colspan="2"><input type="submit" name="add" value="Add new book"></h1>
     <h1 colspan="2"><input type="submit" name="update" value="Update book"></h1>
     <h1 colspan="2"><input type="submit" name="delete" value="Delete book"></h1>
+    <h2><%=request.getLocalAddr()%></h2>
 </body>
 </html>

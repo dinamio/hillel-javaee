@@ -16,13 +16,10 @@ public class DeleteController extends HttpServlet {
 
     private Logger logger = controller.Logger.getInstance();
 
-    public DeleteController() throws IOException {
-    }
-
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         if (req.getParameter("deleteButton") != null){
-            if (JDBCBookDataAccessObject.getJdbcBookDataAccessObject().removeBuId(Long.parseLong(req.getParameter("BookId")))) {
+            if (JDBCBookDataAccessObject.getJdbcBookDataAccessObject().removeById(Long.parseLong(req.getParameter("BookId")))) {
                 resp.getWriter().write("DONE");
                 logger.log(Level.INFO,"Book with id " + req.getParameter("BookId") + " was deleted");
             }

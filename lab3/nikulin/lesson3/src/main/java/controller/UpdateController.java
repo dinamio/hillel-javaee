@@ -17,10 +17,6 @@ public class UpdateController extends HttpServlet {
 
     private Logger logger = controller.Logger.getInstance();
 
-
-    public UpdateController() throws IOException {
-    }
-
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         if (req.getParameter("updateButton") != null){
