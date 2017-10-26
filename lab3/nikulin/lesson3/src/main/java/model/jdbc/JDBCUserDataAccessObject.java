@@ -9,7 +9,6 @@ import java.util.Properties;
 
 public class JDBCUserDataAccessObject implements UsersDataAccessObject {
 
-
     private Properties connInfo;
     private String dataBaseUrl = "jdbc:mysql://localhost:3306/Books?useUnicode=true&characterEncoding=utf8&useSSL=false&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC";
     private String userName = "root";
@@ -29,14 +28,9 @@ public class JDBCUserDataAccessObject implements UsersDataAccessObject {
         connInfo = new Properties();
         connInfo.put("user", userName);
         connInfo.put("password", password);
-        connInfo.put("useUnicode", "true"); // (1)
+        connInfo.put("useUnicode", "true");
         connInfo.put("charSet", "UTF8");
-        System.out.println(connInfo);
-        System.out.println(dataBaseUrl);
-
     }
-
-
 
     @Override
     public boolean getUser(String login, String password) {
@@ -49,17 +43,19 @@ public class JDBCUserDataAccessObject implements UsersDataAccessObject {
 
         String query = "SELECT UserLogin, UserPassword FROM Users WHERE UserLogin='" + login + "'";
 
-        Statement stmt = null;
+        PreparedStatement stmt = null;
 
         User user = new User();
         try {
-            stmt = connection.createStatement();
-            ResultSet rs4 = stmt.executeQuery(query);
-            if (Objects.equals(rs4, null)) return false;
-            while (rs4.next()) {
-                user.setLogin(rs4.getString(1));
-                user.setPassword(rs4.getString(2));
-            }
+            stmt = connection.prepareStatement(query, ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
+            ResultSet resultSet = stmt.executeQuery();
+
+            resultSet.beforeFirst();
+
+            if (resultSet.next()) {
+                user.setLogin(resultSet.getString(1));
+                user.setPassword(resultSet.getString(2));
+            } else return false;
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
@@ -82,6 +78,7 @@ public class JDBCUserDataAccessObject implements UsersDataAccessObject {
             Statement statement = connection.createStatement();
             statement.execute("SET NAMES utf8");
             statement.execute("SET collation_connection='utf8_general_ci'");
+            System.out.println(user.getLogin() + " " + user.getPassword());
             statement.execute(query);
         } catch (SQLException | IllegalAccessException | ClassNotFoundException | InstantiationException e) {
             e.printStackTrace();

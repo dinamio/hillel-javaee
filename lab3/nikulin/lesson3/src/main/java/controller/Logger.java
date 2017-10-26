@@ -15,7 +15,7 @@ public class Logger {
 
     static java.util.logging.Logger getInstance(){
         if (Objects.equals(logger, null)){
-            logger = java.util.logging.Logger.getLogger(Controller.class.getSimpleName());
+            logger = java.util.logging.Logger.getLogger(LoginController.class.getSimpleName());
             FileHandler fileHandler = null;
             try {
                 fileHandler = new FileHandler("/home/pikachu/IdeaProjects/lesson3/log_file.log");

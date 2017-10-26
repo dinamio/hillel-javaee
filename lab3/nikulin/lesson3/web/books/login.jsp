@@ -1,8 +1,8 @@
 <%--
   Created by IntelliJ IDEA.
   User: pikachu
-  Date: 10/23/17
-  Time: 8:11 AM
+  Date: 10/26/17
+  Time: 11:40 AM
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
@@ -15,9 +15,9 @@
     <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
     <meta name="description" content="">
     <meta name="author" content="">
-    <%--<link rel="icon" href="../../favicon.ico">--%>
+    <link rel="icon" href="../../favicon.ico">
 
-    <title>Books</title>
+    <title>Signin Template for Bootstrap</title>
 
     <!-- Bootstrap core CSS -->
     <link href="/css/bootstrap.min.css" rel="stylesheet">
@@ -26,10 +26,11 @@
     <link href="/css/ie10-viewport-bug-workaround.css" rel="stylesheet">
 
     <!-- Custom styles for this template -->
-    <link href="/jumbotron-narrow.css" rel="stylesheet">
+    <link href="../css/signin.css" rel="stylesheet">
 
     <!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
-    <!--[if lt IE 9]><script src="js/ie8-responsive-file-warning.js"></script><![endif]-->
+    <!--[if lt IE 9]>
+    <script src="/js/ie8-responsive-file-warning.js"></script><![endif]-->
     <script src="/js/ie-emulation-modes-warning.js"></script>
 
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
@@ -41,25 +42,23 @@
 
 <body>
 
+
 <div class="container">
-    <div class="header clearfix">
-        <nav>
-            <ul class="nav nav-pills pull-right">
-                <li role="presentation" class="active"><a href="#">Home</a></li>
-                <li role="presentation"><a href="#">About</a></li>
-                <li role="presentation"><a href="#">Contact</a></li>
-            </ul>
-        </nav>
-        <h3 class="text-muted">Books</h3>
-    </div>
 
-    <div class="jumbotron" action="${pageContext.request.contextPath}/books/menu" method="POST">
-        <p><a class="btn btn-lg btn-success" href="/books/show.jsp" role="button" type="submit" name="show">Show all books</a></p>
-        <p><a class="btn btn-lg btn-success" href="/books/add.jsp" role="button" type="submit" name="add">Add new book</a></p>
-        <p><a class="btn btn-lg btn-success" href="/books/update.jsp" role="button" type="submit" name="update">Update book</a></p>
-        <p><a class="btn btn-lg btn-success" href="/books/delete.jsp" role="button" type="submit" name="delete">Delete book</a></p>
-    </div>
-
+    <form class="form-signin" action="${pageContext.request.contextPath}/books/login" method="POST">
+        <h2 class="form-signin-heading">Please sign in</h2>
+        <label for="login" class="sr-only">Login</label>
+        <input type="text" id="login" name="login" class="form-control" placeholder="login" required autofocus>
+        <label for="password" class="sr-only">Password</label>
+        <input type="password" id="password" name="password" class="form-control" placeholder="password" required>
+        <div class="checkbox">
+            <label>
+                <input type="checkbox" value="remember-me"> Remember me
+            </label>
+        </div>
+        <button class="btn btn-lg btn-primary btn-block" type="submit" name="signIn">Sign in</button>
+        <button class="btn btn-lg btn-primary btn-block" type="submit" name="signUp">Sign up</button>
+    </form>
 
 </div> <!-- /container -->
 
