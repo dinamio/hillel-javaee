@@ -52,7 +52,7 @@ public class RegisterServlet extends HttpServlet {
                         .encodedPassword(encodePassword(password))
                         .build();
                 userDao.addNewUser(user);
-                resp.sendRedirect("/welcome");
+                resp.sendRedirect(req.getContextPath() + "/welcome");
             } else {
                 message = new Message("Please fill all input fields");
                 resp.sendRedirect(req.getRequestURI());
