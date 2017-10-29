@@ -6,7 +6,6 @@ import java.util.logging.FileHandler;
 import java.util.logging.SimpleFormatter;
 
 public class Logger {
-//    private static Logger l;
     private static java.util.logging.Logger logger;
     private static SimpleFormatter formatter = new SimpleFormatter();
 
@@ -14,9 +13,9 @@ public class Logger {
     public Logger() throws IOException {
     }
 
-    public static java.util.logging.Logger getInstance(){
+    static java.util.logging.Logger getInstance(){
         if (Objects.equals(logger, null)){
-            logger = java.util.logging.Logger.getLogger(Controller.class.getSimpleName());
+            logger = java.util.logging.Logger.getLogger(LoginController.class.getSimpleName());
             FileHandler fileHandler = null;
             try {
                 fileHandler = new FileHandler("/home/pikachu/IdeaProjects/lesson3/log_file.log");
