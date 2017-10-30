@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Geographic blog</title>
+    <link href="../../resources/css/simplex.css" rel="stylesheet">
+    <link href="../../resources/css/blog.css" rel="stylesheet">
+    <link href="../../resources/css/quill.snow.css" rel="stylesheet">
+</head>
+
+<body>
+
+<nav class="navbar navbar-default navbar-fixed-top">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <div class="navbar-brand" onclick="document.getElementById('message_form').style.display='block'">Add post
+            </div>
+        </div>
+        <div class="navbar-brand navbar-right" href="" id="top">To top</div>
+    </div>
+</nav>
+
+<header>
+    <div class="jumbotron">
+        <div class="container">
+            <h1 class="blog-title">Geographic blog</h1>
+        </div>
+    </div>
+</header>
+
+
+<main role="main" class="container" id="blog_container" style="display: none">
+
+</main>
+
+
+<div id="message_form" class="modal">
+    <form class="modal-content animate">
+        <form role="form" class="form-horizontal" name="blogMessage" method="post">
+            <fieldset>
+                <legend>Enter new blog message</legend>
+                <div class="form-group">
+                    <label for="title" class="control-label"><strong>Title</strong></label>
+                    <div>
+                        <input type="text" minlength="1" maxlength="150" required="required" class="form-control"
+                               id="title"
+                               placeholder="title">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="message_body" class="control-label"><strong>Body</strong></label>
+                    <div class="form-control" id="message_body">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="author" class="control-label"><strong>Author</strong></label>
+                    <div>
+                        <input type="text" minlength="3" maxlength="150" required="required" class="form-control"
+                               id="author"
+                               placeholder="author">
+                    </div>
+                </div>
+                <div class="row col-md-push-3">
+                    <button type="submit" class="btn btn-success" onclick="sendMessage()">Submit</button>
+                    <button type="button" onclick="cleanForm()" class="btn btn-danger">Cancel</button>
+                </div>
+            </fieldset>
+        </form>
+    </form>
+</div>
+
+
+<!-- Bootstrap core JavaScript
+================================================== -->
+<!-- Placed at the end of the document so the pages load faster -->
+<script src="../../resources/js/jquery-3.2.1.min.js"></script>
+<script src="../../resources/js/popper.min.js"></script>
+<script src="../../resources/js/bootstrap.js"></script>
+<script src="../../resources/js/quill.js"></script>
+<script src="../../resources/js/blog.js"></script>
+<!-- Main Quill library -->
+
+</body>
+</html>
