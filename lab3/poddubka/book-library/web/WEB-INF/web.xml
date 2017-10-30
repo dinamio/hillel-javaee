@@ -18,4 +18,13 @@
         <url-pattern>/MainServlet</url-pattern>
     </servlet-mapping>
 
+    <servlet>
+        <servlet-name>DeleteServlet</servlet-name>
+        <servlet-class>com.hillel.DeleteServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>DeleteServlet</servlet-name>
+        <url-pattern>/DeleteServlet</url-pattern>
+    </servlet-mapping>
+    
 </web-app>

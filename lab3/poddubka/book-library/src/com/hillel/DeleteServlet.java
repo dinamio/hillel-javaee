@@ -6,40 +6,32 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 
-public class MainServlet extends HttpServlet {
-
-    public static List<Book> listBook = new ArrayList<>();
+public class DeleteServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-
         req.getRequestDispatcher("/listBook.jsp").forward(req, resp);
-
     }
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         req.setCharacterEncoding("UTF-8");
 
-        String book = req.getParameter("book");
-        String author = req.getParameter("author");
-
-        Book bk = new Book(book, author);
-        listBook.add(bk);
-
         resp.setContentType("text/html");
         resp.setCharacterEncoding("UTF-8");
 
-        req.setAttribute("listBook", listBook);
+        String button = req.getParameter("button");
+
+        int indexBook = Integer.parseInt(button);
+
+        MainServlet.listBook.remove(indexBook);
+
+        req.setAttribute("listBook", MainServlet.listBook);
 
         RequestDispatcher rd = getServletContext().getRequestDispatcher("/listBook.jsp");
         rd.forward(req, resp);
-
     }
+
 }
-
-
 

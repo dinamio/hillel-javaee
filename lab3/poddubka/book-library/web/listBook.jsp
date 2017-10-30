@@ -29,10 +29,12 @@
 
     out.println("<ol>");
     for(int i = 0; i < listBook.size(); i++) {
+        out.println("<form method=\"post\" action=\"DeleteServlet\">");
         out.println("<li>");
         out.println(listBook.get(i) + " ");
-        out.println("<button name='button" + i + "' type='submit' value='button" + i + "'>Del</button>");
+        out.println("<button name='button' type='submit' value='" + i + "'>Del</button>");
         out.println("</li>");
+        out.println("</form>");
     }
     out.println("</ol>");
 %>

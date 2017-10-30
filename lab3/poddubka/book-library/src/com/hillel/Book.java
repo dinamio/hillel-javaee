@@ -2,7 +2,6 @@ package com.hillel;
 
 public class Book {
 
- //   private  long id;
     private String bookName;
     private String authorName;
 
@@ -13,15 +12,6 @@ public class Book {
         this.bookName = bookName;
         this.authorName = authorName;
     }
-
-
-//    public long getId() {
-//        return id;
-//    }
-//
-//    public void setId(long id) {
-//        this.id = id;
-//    }
 
     public String getBookName() {
         return bookName;
