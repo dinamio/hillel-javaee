@@ -2,46 +2,45 @@ package com.hillel;
 
 public class Book {
 
-    private int id;
-    private String book;
-    private String author;
+ //   private  long id;
+    private String bookName;
+    private String authorName;
 
     public Book() {
     }
 
-    public Book(int id, String book, String author) {
-        this.id = id;
-        this.book = book;
-        this.author = author;
+    public Book(String bookName, String authorName) {
+        this.bookName = bookName;
+        this.authorName = authorName;
     }
 
-    public int getId() {
-        return id;
+
+//    public long getId() {
+//        return id;
+//    }
+//
+//    public void setId(long id) {
+//        this.id = id;
+//    }
+
+    public String getBookName() {
+        return bookName;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setBookName(String bookName) {
+        this.bookName = bookName;
     }
 
-    public String getBook() {
-        return book;
+    public String getAuthorName() {
+        return authorName;
     }
 
-    public void setBook(String book) {
-        this.book = book;
-    }
-
-    public String getAuthor() {
-        return author;
-    }
-
-    public void setAuthor(String author) {
-        this.author = author;
+    public void setAuthorName(String authorName) {
+        this.authorName = authorName;
     }
 
     @Override
     public String toString() {
-        return id + ", " + book + ", " + author +"\n";
+        return bookName + ", " + authorName;
     }
-
 }
