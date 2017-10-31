@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
+
 public class DeleteServlet extends HttpServlet {
 
     @Override
@@ -25,9 +26,9 @@ public class DeleteServlet extends HttpServlet {
 
         int indexBook = Integer.parseInt(button);
 
-        MainServlet.listBook.remove(indexBook);
+        MainServlet.BOOK_LIST.remove(indexBook);
 
-        req.setAttribute("listBook", MainServlet.listBook);
+        req.setAttribute("listBook", MainServlet.BOOK_LIST);
 
         RequestDispatcher rd = getServletContext().getRequestDispatcher("/listBook.jsp");
         rd.forward(req, resp);

@@ -9,9 +9,10 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+
 public class MainServlet extends HttpServlet {
 
-    public static List<Book> listBook = new ArrayList<>();
+    public static final List<Book> BOOK_LIST = new ArrayList<>();
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -28,12 +29,12 @@ public class MainServlet extends HttpServlet {
         String author = req.getParameter("author");
 
         Book bk = new Book(book, author);
-        listBook.add(bk);
+        BOOK_LIST.add(bk);
 
         resp.setContentType("text/html");
         resp.setCharacterEncoding("UTF-8");
 
-        req.setAttribute("listBook", listBook);
+        req.setAttribute("listBook", BOOK_LIST);
 
         RequestDispatcher rd = getServletContext().getRequestDispatcher("/listBook.jsp");
         rd.forward(req, resp);

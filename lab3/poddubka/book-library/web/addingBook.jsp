@@ -13,8 +13,7 @@
     <p><input type="submit" value="Exit"></p>
     <hr />
 </form>
-<center>
-    <h1>Adding book</h1>
+    <h1 align="center">Adding book</h1>
     <form method="post" action="MainServlet">
         <p>Input the title of the book:
             <input type="text" name="book"></p>
@@ -22,6 +21,5 @@
             <input type="text" name="author"></p>
         <p><input type="submit" value="Add"></p>
     </form>
-</center>
 </body>
 </html>
