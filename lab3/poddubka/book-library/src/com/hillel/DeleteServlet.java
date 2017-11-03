@@ -28,7 +28,7 @@ public class DeleteServlet extends HttpServlet {
 
         MainServlet.BOOK_LIST.remove(indexBook);
 
-        req.setAttribute("listBook", MainServlet.BOOK_LIST);
+     //   req.setAttribute("listBook", MainServlet.BOOK_LIST);
 
         RequestDispatcher rd = getServletContext().getRequestDispatcher("/listBook.jsp");
         rd.forward(req, resp);

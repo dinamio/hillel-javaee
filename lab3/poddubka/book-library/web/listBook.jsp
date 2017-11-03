@@ -28,7 +28,7 @@
         <form method="post" action="DeleteServlet">
         <li>
         <%=BOOK_LIST.get(i).getBookName() + ", " + BOOK_LIST.get(i).getAuthorName()%>
-        <button name='button' type='submit' value='button<%=i%>'>Del</button>
+        <button name="button" type="submit" value="button<%=i%>">Del</button>
         </li>
         </form>
    <% } %>
