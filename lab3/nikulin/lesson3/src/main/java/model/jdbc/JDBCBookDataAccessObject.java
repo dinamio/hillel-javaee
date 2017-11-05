@@ -71,7 +71,7 @@ public class JDBCBookDataAccessObject implements BookDataAccessObject {
             e.printStackTrace();
         }
 
-        String query = "SELECT *FROM BookList";
+        String query = "SELECT  *FROM BookList";
 
         Statement stmt = null;
 
@@ -137,7 +137,7 @@ public class JDBCBookDataAccessObject implements BookDataAccessObject {
     }
 
     @Override
-    public boolean removeBuId(long id) {
+    public boolean removeById(long id) {
         try {
             Class.forName("com.mysql.jdbc.Driver").newInstance();
             connection = DriverManager.getConnection(dataBaseUrl, connInfo);

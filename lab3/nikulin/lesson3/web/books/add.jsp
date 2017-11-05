@@ -18,12 +18,6 @@
   <table border = "0">
 
     <tr>
-      <td><b>Id Book For Remove or Update</b></td>
-      <td><input type = "text" name = "BookId"
-                 value = "007" size = "70"/></td>
-    </tr>
-
-    <tr>
       <td><b>BookName</b></td>
       <td><input type = "text" name = "BookName"
                  value = "Legends of the Midgard" size = "70"/></td>
