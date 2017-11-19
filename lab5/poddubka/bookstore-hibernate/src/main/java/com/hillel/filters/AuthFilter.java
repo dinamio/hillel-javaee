@@ -2,7 +2,7 @@ package com.hillel.filters;
 
 //import org.apache.commons.lang3.StringUtils;
 
-import com.hillel.User;
+import com.hillel.model.User;
 
 import javax.servlet.*;
 import javax.servlet.http.HttpServletRequest;

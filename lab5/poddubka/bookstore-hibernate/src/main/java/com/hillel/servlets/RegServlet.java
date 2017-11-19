@@ -1,6 +1,8 @@
 package com.hillel.servlets;
 
-import com.hillel.User;
+import com.hillel.dao.UserDao;
+import com.hillel.dao.impl.UserDaoImpl;
+import com.hillel.model.User;
 import com.hillel.UserDatasource;
 
 import javax.servlet.ServletException;
@@ -25,13 +27,36 @@ public class RegServlet  extends HttpServlet {
 
         if (newName != null && newPassword != null && !newName.equals("") && !newPassword.equals("")) {
 
-            User user = UserDatasource.setUserData(newName, newPassword);
-            if (user != null) {
-                session.setAttribute("PRINCIPAL", user);
+            //      User user = UserDatasource.setUserData(newName, newPassword);
+
+            User user = new User(newName, newPassword);
+
+            UserDao userDao = new UserDaoImpl(user);
+
+            User newUser = userDao.findByName(newName);
+
+
+            if (newUser == null) {
+
+                // регистрация...
+                // ...
+
+                Integer id = userDao.insertUser(newUser);
+                // ...
+                session.setAttribute("PRINCIPAL", newUser);
                 resp.sendRedirect("/changingListBook.jsp");
                 return;
+
             }
+
+            if (newUser != null && newName.equals(newUser.getUserName())) {
+                session.setAttribute("DUBLICATE", user);
+                resp.sendRedirect("/dublicateName.jsp");
+                return;
+            }
+
         }
+
         resp.sendRedirect("/registration.html");
     }
 }
