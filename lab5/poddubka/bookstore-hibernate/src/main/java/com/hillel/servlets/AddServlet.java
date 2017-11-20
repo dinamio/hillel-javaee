@@ -11,25 +11,28 @@ import com.hillel.service.BookStoreService;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
-
+@WebServlet("/AddServlet")
 public class AddServlet extends HttpServlet {
 
-    public static final List<Book> BOOK_LIST = new ArrayList<>();
+//    public static final List<Book> BOOK_LIST = new ArrayList<>();
 
-    public static final BookStoreService BOOK_STORE_SERVICE = null;
+    public BookStoreService bookStoreService;
+    public static final Book book = null; //??? static final ???
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-        req.getRequestDispatcher("/changingListBook.jsp").forward(req, resp);
+        req.getRequestDispatcher("/userListBook.jsp").forward(req, resp);
 
     }
 
@@ -45,53 +48,47 @@ public class AddServlet extends HttpServlet {
 
         if (bookName != null && authorName != null && !bookName.equals("") && !authorName.equals("")) {
 
+            // парсим авторов
+            List<String> authors = stringToList(authorName);
+
+            // записываем автора(ов) в  лист и базу
+            List<Author> listAuthor = new ArrayList<>();
+            for (String s: authors) {
+                Author author = new Author(s);
+                listAuthor.add(author);
+                bookStoreService.insertAuthor(s);
+            }
+
             // записываем book и author в базу
-            BOOK_STORE_SERVICE.insertAuthor(authorName);
-
-            List<Author> listAuthor = null;
-            BOOK_STORE_SERVICE.insertBook(bookName, listAuthor, addedName);
-
-//            Author author = new Author(authorName);
-//            AuthorDao authorDao = new AuthorDaoImpl();
-//            Integer id = authorDao.insertAuthor(author);
-//
-//            Book book = new Book(bookName);
-//            book.setBookName(bookName);
-//            book.setId(id);
-//            BookDao bookDao = new BookDaoImpl();
-//            bookDao.insertBook(book);
-//
-//            BOOK_LIST.add(book);
-
+            bookStoreService.insertBook(bookName, listAuthor, addedName);
 
             resp.setContentType("text/html");
             resp.setCharacterEncoding("UTF-8");
 
-            req.setAttribute("listBook", BOOK_LIST);
+            BookDao bookDao = new BookDaoImpl();
+            List<Book> bookList = bookDao.getAllBook();
+
+            req.setAttribute("listBook", bookList);
         }
 
-        RequestDispatcher rd = getServletContext().getRequestDispatcher("/changingListBook.jsp");
+        RequestDispatcher rd = getServletContext().getRequestDispatcher("/userListBook.jsp");
         rd.forward(req, resp);
     }
 
-//    private static List<Author> parseAuthors(String authorNames) {
-//        Author author = new Author();
-//        List<Author> list = null;
-//
-//        StringBuilder sb = new StringBuilder(authorNames);
-//        StringBuilder resault = new StringBuilder();
-//        for (int i = 0; i < sb.length() - 1; i++) {
-//            if (sb.charAt(i) == ',') {
-//                author.setAuthorName(resault.toString());
-//                list.add(author);
-//                resault = new StringBuilder();
-//            } else {
-//                resault.append(resault.charAt(i));
-//            }
-//        }
-//        return list;
-//
-//    }
+    public static List<String> stringToList(String str) {
+        String[] list = str.split(",");
+        List<String> resault = new ArrayList<>(Arrays.asList(list));
+        return resault;
+    }
+
+    public static String listToString(List<String> list) {
+        StringBuilder sb  = new StringBuilder();
+        for (String a: list) {
+            sb.append(a);
+            sb.append("\n");
+        }
+        return sb.toString();
+    }
 }
 
 

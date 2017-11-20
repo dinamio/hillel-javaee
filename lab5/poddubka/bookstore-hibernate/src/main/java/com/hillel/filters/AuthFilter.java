@@ -5,6 +5,7 @@ package com.hillel.filters;
 import com.hillel.model.User;
 
 import javax.servlet.*;
+import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -12,9 +13,10 @@ import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
 
+@WebFilter("/*")
 public class AuthFilter implements Filter {
 
-    private List<String> pathFilters = Arrays.asList("changingListBook.jsp", "addingBook.jsp");
+    private List<String> pathFilters = Arrays.asList("userListBook.jsp", "addingBook.jsp");
 
     @Override
     public void init(FilterConfig filterConfig) throws ServletException {

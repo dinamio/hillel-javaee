@@ -1,4 +1,7 @@
-<%@ page import="static com.hillel.servlets.AddServlet.BOOK_LIST" %>
+<%@ page import="com.hillel.model.Book" %>
+<%@ page import="com.hillel.servlets.AddServlet" %>
+<%@ page import="java.util.Iterator" %>
+<%@ page import="java.util.List" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
@@ -26,20 +29,22 @@
         <td width="50%" align="center">AddedName</td>
         <td width="50%" align="center">Operation</td>
     </tr>
-    <%
-        for(int i = 0; i < BOOK_LIST.size(); i++) { %>
+    <% List<Book> book = (List<Book>) request.getAttribute("listBook");
+        for(int i = 0; i < book.size(); i++) { // ???? %>
     <tr>
         <form method="post" action="DeleteServlet">
-            <td width="5%" align="center"><%= i + 1 %></td>
-            <td width="50%" align="center"><%=BOOK_LIST.get(i).getBookName()%></td>
-            <td width="50%" align="center"><%=BOOK_LIST.get(i).getAuthorName()%></td>
-            <td width="50%" align="center"><%=BOOK_LIST.get(i).getAddedName()%></td>
-            <td width="50%" align="center"><button name="button" type="submit" value="button<%=i%>">Del</button></td>
+            <td width="5%" align="center"><%=book.get(i).getId()%></td>
+            <td width="50%" align="center"><%=book.get(i).getBookName()%></td>
+            <td width="50%" align="center"><%=book.get(i).getAuthors() // ??? List<Author>%></td>
+            <td width="50%" align="center"><%=book.get(i).getUser()%></td>
+            <td width="50%" align="center"><button name="button" type="submit" value="button<%=book.get(i).getId()%>">Del</button></td>
         </form>
     </tr>
     <% } %>
 </table>
 <br>
     <a href='http://localhost:8080/addingBook.jsp'><< Add a book</a>
+    <br>
+    <a href='http://localhost:8080/listBook.jsp'><< list of books</a>
 </body>
 </html>

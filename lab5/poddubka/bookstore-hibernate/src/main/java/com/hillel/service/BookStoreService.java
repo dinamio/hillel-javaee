@@ -20,7 +20,6 @@ public class BookStoreService {
 
     // Author
     public Author insertAuthor(String name) {
-
         Author author = new Author();
         Integer id = authorDao.insertAuthor(author);
         author.setId(id);
@@ -41,6 +40,10 @@ public class BookStoreService {
         return book;
     }
 
+    public void deleteBook(Integer id) {
+        bookDao.deleteBookById(id);
+    }
+
     public Book getBook(Integer id) {
         return bookDao.findBookById(id);
     }
@@ -53,7 +56,17 @@ public class BookStoreService {
         return user;
     }
 
+    public boolean findByName(String name) {
+        User user = userDao.findByName(name);
+        if (user == null) {
+            return false;
+        }
+        return true;
+    }
+
     public User getUser(Integer id) {
         return userDao.findById(id);
     }
+
+
 }

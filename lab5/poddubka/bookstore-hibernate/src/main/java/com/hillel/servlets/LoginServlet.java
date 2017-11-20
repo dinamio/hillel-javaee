@@ -1,15 +1,17 @@
 package com.hillel.servlets;
 
-import com.hillel.User;
-import com.hillel.UserDatasource;
+import com.hillel.dao.impl.UserDaoImpl;
+import com.hillel.model.User;
 
 import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
+@WebServlet("/LoginServlet")
 public class LoginServlet extends HttpServlet{
 
     @Override
@@ -22,12 +24,15 @@ public class LoginServlet extends HttpServlet{
 
         if (username != null && password != null && !username.equals("") && !password.equals("")) {
 
-            User user = UserDatasource.getByUsernameAndPassword(username, password);
-            if (user != null) {
+            UserDaoImpl userDao = new UserDaoImpl();
+            User user = userDao.findByName(username);
+
+            if(user != null && user.getUserPassword().equals(password)) {
                 session.setAttribute("PRINCIPAL", user);
-                resp.sendRedirect("/changingListBook.jsp");
+                resp.sendRedirect("/userListBook.jsp");
                 return;
             }
+
         }
         resp.sendRedirect("/registration.html");
     }

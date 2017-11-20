@@ -20,7 +20,7 @@
         <p>Input the title of the book:
             <input type="text" name="book"></p>
         <p>Input the author:
-            <input type="text" name="author"></p>
+            <input type="text" name="author" placeholder="Author1,Author2,..."></p>
         <p><input type="submit" value="Add"></p>
     </form>
 </body>

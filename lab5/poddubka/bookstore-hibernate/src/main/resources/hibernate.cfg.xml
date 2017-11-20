@@ -22,5 +22,21 @@
         <mapping class="com.hillel.model.User"/>
         <mapping class="com.hillel.model.Author"/>
 
+        <mapping class="com.hillel.service.BookStoreService"/>
+        <mapping class="com.hillel.util.HibernateUtil"/>
+
+        <mapping class="com.hillel.filters.AuthFilter"/>
+
+        <mapping class="com.hillel.servlets.AddServlet"/>
+        <mapping class="com.hillel.servlets.DeleteServlet"/>
+        <mapping class="com.hillel.servlets.LoginServlet"/>
+        <mapping class="com.hillel.servlets.LogoutServlet"/>
+        <mapping class="com.hillel.servlets.RegServlet"/>
+
+        <mapping class="com.hillel.dao.impl.AuthorDaoImpl"/>
+        <mapping class="com.hillel.dao.impl.BookDaoImpl"/>
+        <mapping class="com.hillel.dao.impl.UserDaoImpl"/>
+
+
     </session-factory>
 </hibernate-configuration>

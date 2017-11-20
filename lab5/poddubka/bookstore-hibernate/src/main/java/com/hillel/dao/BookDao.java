@@ -11,4 +11,6 @@ public interface BookDao {
     Integer insertBook(Book book);
 
     Book findBookById(Integer id);
+
+    void deleteBookById(Integer id);
 }

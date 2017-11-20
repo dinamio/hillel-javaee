@@ -15,15 +15,6 @@ public class Book {
     @Column(name = "book_name")
     private String bookName;
 
-
-    ////////////////////
-//    @Column(name = "user_id")
-//    private String  addedName;
-    ///////////////////
-
-
-
-   // @ManyToMany(fetch = FetchType.EAGER, mappedBy = "book")
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "items",
             joinColumns = {@JoinColumn(name = "book_id")},
@@ -41,7 +32,6 @@ public class Book {
     public Book(Integer id, String bookName) {
         this.id = id;
         this.bookName = bookName;
- //       this.addedName = addedName;
     }
 
     public Book(String bookName) {
@@ -68,6 +58,7 @@ public class Book {
     }
 
     public List<Author> getAuthors() {
+
         return authors;
     }
 
@@ -91,22 +82,9 @@ public class Book {
         this.bookName = bookName;
     }
 
-//    public String getAddedName() {
-//        return addedName;
-//    }
+//    @Override
+//    public String toString() {
 //
-//    public void setAddedName(String addedName) {
-//        this.addedName = addedName;
+//        return String.join("\n", authors);
 //    }
-
-
-    @Override
-    public String toString() {
-        return "Book{" +
-                "id=" + id +
-                ", bookName='" + bookName + '\'' +
-                ", authors=" + authors +
-                ", user=" + user +
-                '}';
-    }
 }

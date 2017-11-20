@@ -11,8 +11,7 @@
     <title>error name</title>
 </head>
 <body>
-    <h1 align="center">${"DUBLICATE"} user already exists.</h1>
-
+    <h1 align="center">User already exists.</h1>
     <a href='http://localhost:8080/registration.html'><< Back to registration</a>
 </body>
 </html>

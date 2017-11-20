@@ -9,6 +9,8 @@ import org.hibernate.Transaction;
 
 import java.util.List;
 
+import static com.hillel.servlets.AddServlet.book;
+
 public class BookDaoImpl implements BookDao {
 
     Session session = HibernateUtil.getSession();
@@ -37,11 +39,10 @@ public class BookDaoImpl implements BookDao {
         return book;
     }
 
-    public String listBookToString(List<Book> list) {
-
-        for (Book b:list) {
-
-        }
-        return null;
+    @Override
+    public void deleteBookById(Integer id) {
+        session.createQuery("delete from 'Book' where id=" + id + ";").list();
+        // или ???
+        //session.delete("from Book", book.getId());
     }
 }

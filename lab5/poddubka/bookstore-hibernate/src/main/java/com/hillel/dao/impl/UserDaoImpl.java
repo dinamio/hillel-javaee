@@ -8,20 +8,20 @@ import org.hibernate.Transaction;
 
 public class UserDaoImpl implements UserDao{
 
-    User user;
+ //   User user;
 
     public UserDaoImpl() {
     }
 
-    public UserDaoImpl(User user) {
-        this.user = user;
-    }
+ //   public UserDaoImpl(User user) {
+ //       this.user = user;
+//    }
 
     @Override
     public User findById(Integer id) {
         Session session = HibernateUtil.getSession();
         Transaction transaction = session.beginTransaction();
-        user = (User) session.get(User.class, id);
+        User user = (User) session.get(User.class, id);
         transaction.commit();
 
         return user;
@@ -31,7 +31,7 @@ public class UserDaoImpl implements UserDao{
     public User findByName(String name) {
         Session session = HibernateUtil.getSession();
         Transaction transaction = session.getTransaction();
-        user = (User) session.get(User.class, name);
+        User user = (User) session.get(User.class, name);
         transaction.commit();
 
         return user;
@@ -43,13 +43,11 @@ public class UserDaoImpl implements UserDao{
 //    public boolean findByName(String name) {
 //        Session session = HibernateUtil.getSession();
 //        Transaction transaction = session.beginTransaction();
-//        boolean b = true;
+//        boolean b = false;
 //
 //        return b;
 //    }
 //////////////////////////////
-
-
 
     @Override
     public Integer insertUser(User user) {

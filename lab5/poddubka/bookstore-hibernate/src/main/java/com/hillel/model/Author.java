@@ -14,10 +14,6 @@ public class Author {
     @Column(name = "author_name")
     private String authorName;
 
-//    @ManyToMany
-//    @JoinTable(name = "items",
-//            joinColumns = {@JoinColumn(name = "author_id")},
-//            inverseJoinColumns = {@JoinColumn(name = "book_id")})
     @ManyToMany(fetch = FetchType.EAGER, mappedBy = "author")
     private List<Book> books;
 
@@ -62,12 +58,4 @@ public class Author {
         this.authorName = authorName;
     }
 
-    @Override
-    public String toString() {
-        return "Author{" +
-                "id=" + id +
-                ", authorName='" + authorName + '\'' +
-                ", books=" + books +
-                '}';
-    }
 }
