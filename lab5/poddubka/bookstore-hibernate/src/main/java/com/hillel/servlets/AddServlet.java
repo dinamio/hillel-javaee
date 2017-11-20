@@ -21,7 +21,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-@WebServlet("/AddServlet")
+@WebServlet(urlPatterns = {"/AddServlet"})
 public class AddServlet extends HttpServlet {
 
 //    public static final List<Book> BOOK_LIST = new ArrayList<>();

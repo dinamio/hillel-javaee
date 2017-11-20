@@ -35,7 +35,7 @@
         <form method="post" action="DeleteServlet">
             <td width="5%" align="center"><%=book.get(i).getId()%></td>
             <td width="50%" align="center"><%=book.get(i).getBookName()%></td>
-            <td width="50%" align="center"><%=book.get(i).getAuthors() // ??? List<Author>%></td>
+            <td width="50%" align="center"><%=book.get(i).getAuthors()%></td>
             <td width="50%" align="center"><%=book.get(i).getUser()%></td>
             <td width="50%" align="center"><button name="button" type="submit" value="button<%=book.get(i).getId()%>">Del</button></td>
         </form>

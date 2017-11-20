@@ -56,13 +56,13 @@
     <!--</filter-mapping>-->
 
 
-    <!--<servlet>-->
-        <!--<servlet-name>RegServlet</servlet-name>-->
-        <!--<servlet-class>com.hillel.servlets.RegServlet</servlet-class>-->
-    <!--</servlet>-->
-    <!--<servlet-mapping>-->
-        <!--<servlet-name>RegServlet</servlet-name>-->
-        <!--<url-pattern>/RegServlet</url-pattern>-->
-    <!--</servlet-mapping>-->
+    <servlet>
+        <servlet-name>RegServlet</servlet-name>
+        <servlet-class>com.hillel.servlets.RegServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>RegServlet</servlet-name>
+        <url-pattern>/RegServlet</url-pattern>
+    </servlet-mapping>
 
 </web-app>

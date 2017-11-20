@@ -14,7 +14,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
-@WebServlet("/RegServlet")
+@WebServlet(urlPatterns = {"/RegServlet"})
 public class RegServlet  extends HttpServlet {
 
     @Override

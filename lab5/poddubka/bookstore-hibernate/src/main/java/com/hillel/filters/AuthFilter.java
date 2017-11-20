@@ -13,7 +13,7 @@ import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
 
-@WebFilter("/*")
+@WebFilter(urlPatterns = {"/*"})
 public class AuthFilter implements Filter {
 
     private List<String> pathFilters = Arrays.asList("userListBook.jsp", "addingBook.jsp");
