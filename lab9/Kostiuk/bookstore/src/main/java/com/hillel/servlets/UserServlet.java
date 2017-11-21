@@ -6,7 +6,6 @@ import com.hillel.model.Book;
 import com.hillel.model.User;
 import com.hillel.model.presentation.SimpleBookPresentation;
 import com.hillel.service.UserService;
-import com.hillel.service.impl.UserServiceImpl;
 import com.hillel.util.Utils;
 import lombok.NoArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,17 +23,10 @@ import java.util.stream.Collectors;
 @WebServlet("/users")
 @Component
 @NoArgsConstructor
-public class UserServlet extends HttpServlet {
+public class UserServlet extends BasicHttpServlet {
 
     @Autowired
     private UserService userService;
-
-
-//    @Autowired
-//    public UserServlet(UserService userService) {
-//        this.userService = userService;
-//    }
-
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {

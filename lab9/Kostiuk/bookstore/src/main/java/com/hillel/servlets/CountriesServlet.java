@@ -1,13 +1,11 @@
 package com.hillel.servlets;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.hillel.dto.WriterNameDto;
-import com.hillel.service.WriterService;
-import com.hillel.service.impl.WriterServiceImpl;
+import com.hillel.model.Country;
+import com.hillel.service.CountryService;
+import com.hillel.service.impl.CountryServiceImpl;
 import com.hillel.util.Utils;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -17,30 +15,22 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.List;
 
-@Slf4j
-@WebServlet("/rest/writers")
-@Component
-public class WriterServlet extends BasicHttpServlet {
+@WebServlet("/rest/countries")
+public class CountriesServlet extends BasicHttpServlet {
 
     @Autowired
-    private WriterService writerService;
+    private CountryService countryService;
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         Long id = Utils.requestID(req).orElse(-1L);
 
         if (id == -1) {
-            List<WriterNameDto> writerNames = writerService.getAllWriterNames();
+            List<Country> countries = countryService.getAll();
             ObjectMapper objectMapper = new ObjectMapper();
-            objectMapper.writeValue(resp.getWriter(), writerNames);
+            objectMapper.writeValue(resp.getWriter(), countries);
             return;
         }
-        resp.sendRedirect(req.getRequestURI());
-    }
-
-    @Override
-    protected void doDelete(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        Utils.requestID(req).flatMap(writerService::getById).ifPresent(writerService::delete);
         resp.sendRedirect(req.getRequestURI());
     }
 

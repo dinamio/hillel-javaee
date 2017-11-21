@@ -11,6 +11,7 @@
     <link href="//cdnjs.cloudflare.com/ajax/libs/jqueryui/1.11.2/jquery-ui.css" rel="stylesheet"/>
     <link rel="stylesheet" type="text/css" media="screen" href="${_css}"/>
     <link rel="stylesheet" type="text/css" media="screen" href="../styles/bookstore.css"/>
+    <link rel="stylesheet" type="text/css" media="screen" href="../styles/awesomplete.css"/>
     <title>Bookstore</title>
 </head>
 

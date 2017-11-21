@@ -43,12 +43,10 @@ public class BookServiceImpl implements BookService {
         Optional.ofNullable(bookDao.insert(book)).ifPresent(book::setId);
         return Optional.of(book);
     }
-
     @Override
     public void update(Long id, Consumer<Book> updater) {
         bookDao.update(id, updater);
     }
-
     @Override
     public void update(Book entity, Consumer<Book> updater) {
         bookDao.update(entity, updater);

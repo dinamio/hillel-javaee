@@ -15,10 +15,10 @@
         <div class="h1">Users</div>
     </div>
 </div>
-<section class="container col-md-7 col-sm-offset-1">
+<section class="container col-md-9 col-sm-offset-1">
     <div>
-        <table id="users_table" class="table table-hover table-striped table-responsive table-bordered">
-            <thead class="info">
+        <table id="users_table" class=" col-md-pull-8 table table-hover table-striped table-responsive table-bordered">
+            <thead class="thead-dark">
             <tr>
                 <th><h4>ID</h4></th>
                 <th><h4>First Name</h4></th>
@@ -34,22 +34,18 @@
                     <td><h5><c:out value="${user.firstName}"/></h5></td>
                     <td><h5><c:out value="${user.lastName}"/></h5></td>
                     <td><h5><c:out value="${user.loginName}"/></h5></td>
-                        <%--<td>--%>
-                        <%--<a class="btn btn-danger btn-sm" href=""--%>
-                        <%--onclick=sendDeleteRequest("<c:url value="/users?id=${user.id}"/>")>Delete</a>--%>
-                        <%--</td>--%>
                 </tr>
             </c:forEach>
             </tbody>
         </table>
     </div>
-    <div class="col-md-8" id="table_container">
+    <div id="table_container" class="modal col-md-1">
 
     </div>
-    <%--</div>--%>
 </section>
 
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+<script src="../resources/js/jquery-3.2.1.min.js"></script>
 <script src="../resources/js/config.js"></script>
 <script src="../resources/js/bookstore.js"></script>
 </body>

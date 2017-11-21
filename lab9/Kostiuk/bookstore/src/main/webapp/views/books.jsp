@@ -39,7 +39,7 @@
                 <td>
                     <c:forEach items="${book.author.countries}" var="country">
                         <ul class="list-unstyled">
-                            <li> <c:out value="${country.name}"/></li>
+                            <li><c:out value="${country.name}"/></li>
                         </ul>
                     </c:forEach>
                 </td>
@@ -47,7 +47,7 @@
                 <td>
                     <a class="btn btn-primary btn-sm"
                        href="<c:url value="/books?id=${book.id}" />">About book</a>
-                    <a class="btn btn-danger btn-sm" href=""
+                    <a class="btn btn-danger btn-sm" href="" type="button"
                        onclick=sendDeleteRequest("<c:url value="/books?id=${book.id}"/>")>Delete</a>
                 </td>
             </tr>
@@ -56,6 +56,6 @@
     </table>
     <a class="btn btn-warning btn-sm pull-right" onclick=toTop()>To top</a>
 </section>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="../resources/js/jquery-3.2.1.min.js"></script>
 <script src="../resources/js/bookstore.js"></script>
 </body>

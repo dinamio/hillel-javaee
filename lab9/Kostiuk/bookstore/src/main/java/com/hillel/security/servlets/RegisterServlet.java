@@ -2,6 +2,7 @@ package com.hillel.security.servlets;
 
 import com.hillel.model.User;
 import com.hillel.service.UserService;
+import com.hillel.servlets.BasicHttpServlet;
 import com.hillel.util.Message;
 import org.mindrot.jbcrypt.BCrypt;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,16 +20,12 @@ import static com.hillel.util.Utils.isValidInput;
 
 @WebServlet("/register")
 @Component
-public class RegisterServlet extends HttpServlet {
+public class RegisterServlet extends BasicHttpServlet {
 
-
-    private final UserService userService;
-    private       Message     message;
 
     @Autowired
-    public RegisterServlet(UserService userService) {
-        this.userService = userService;
-    }
+    private UserService userService;
+    private Message message;
 
 
     @Override

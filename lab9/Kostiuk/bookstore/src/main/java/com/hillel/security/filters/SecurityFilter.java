@@ -1,8 +1,6 @@
 package com.hillel.security.filters;
 
 import com.auth0.jwt.interfaces.DecodedJWT;
-import com.hillel.dao.UserDao;
-import com.hillel.dao.impl.hibernate.UserDaoImpl;
 import com.hillel.filters.BasicHttpFilter;
 import com.hillel.security.AuthHelper;
 import com.hillel.service.UserService;
@@ -11,7 +9,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import javax.servlet.FilterChain;
-import javax.servlet.FilterConfig;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.Cookie;
@@ -23,18 +20,12 @@ import java.util.Arrays;
 import java.util.Date;
 
 @Slf4j
-//@WebFilter({"/books/*", "/welcome", "/users/*"})
-//@Component
+@WebFilter({"/books/*", "/welcome", "/users/*"})
+@Component
 public class SecurityFilter implements BasicHttpFilter {
 
     @Autowired
     private UserService userService;
-
-//    @Autowired
-//    public SecurityFilter(UserService userService) {
-//        this.userService = userService;
-//    }
-
 
     @Override
     public void doHttpFilter(HttpServletRequest request, HttpServletResponse response, FilterChain chain) throws IOException {

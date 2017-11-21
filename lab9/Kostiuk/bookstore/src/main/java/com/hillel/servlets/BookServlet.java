@@ -9,8 +9,9 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
-import org.springframework.web.context.support.WebApplicationContextUtils;
+import org.springframework.web.context.support.SpringBeanAutowiringSupport;
 
+import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -26,7 +27,7 @@ import static com.hillel.util.Utils.resourceAsBytes;
 @Slf4j
 @Component
 @WebServlet("/books")
-public class BookServlet extends HttpServlet {
+public class BookServlet extends BasicHttpServlet {
 
     @Autowired
     @Qualifier("bookService")
@@ -35,16 +36,6 @@ public class BookServlet extends HttpServlet {
     private UserService userService;
 
     private byte[] noImage = resourceAsBytes("noimg.jpg");
-
-    public BookServlet() {
-
-    }
-
-    //    @Autowired
-//    public BookServlet(BookService bookService, UserService userService) {
-//        this.bookService = bookService;
-//        this.userService = userService;
-//    }
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -59,7 +50,6 @@ public class BookServlet extends HttpServlet {
         }
 
         List<Book> books = bookService.getAll();
-//        List<Book> books = WebApplicationContextUtils.getRequiredWebApplicationContext(getServletContext()).getBean(BookService.class).getAll();
         req.setAttribute("books", books);
         req.getRequestDispatcher("/views/books.jsp").forward(req, resp);
     }
@@ -76,11 +66,12 @@ public class BookServlet extends HttpServlet {
 
         Integer pagesValue = getNumberOrZero(pages);
         Integer yearValue = getNumberOrZero(year);
-        log.info("receive {}", req);
 
-        Optional<Book> book = bookService.insert(language, "", pagesValue, title, yearValue, author, country);
+        Optional<Book> book = bookService.insert(language, "https://www.google.com/search?q=" + title, pagesValue, title, yearValue, author, country);
         Optional<User> userAttr = userService.getEagerStateByLogin(user.getLoginName());
-        book.ifPresent(b -> bookService.update(b, bk -> bk.setUser(userAttr.get())));
+        book.ifPresent(b -> {
+            bookService.update(b, bk -> bk.setUser(userAttr.get()));
+        });
         userAttr.ifPresent(us -> {
             List<Book> books = us.getBooks();
             userService.update(us, u -> books.add(book.get()));

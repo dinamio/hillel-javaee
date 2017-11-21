@@ -1,6 +1,8 @@
 package com.hillel.model;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -20,11 +22,14 @@ public class Country {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @JsonProperty("id")
     private Long id;
 
     @Column(name = "name")
+    @JsonProperty("name")
     private String name;
 
+    @JsonIgnore
     @ManyToMany(mappedBy = "countries", fetch = FetchType.LAZY)
     private List<Writer> writers;
 

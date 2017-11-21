@@ -31,7 +31,7 @@
             <div class="form-group">
                 <label for="author" class="col-sm-3 control-label">Author</label>
                 <div class="col-sm-9">
-                    <input type="text" minlength="1" maxlength="50" value="Unknown_Author" class="form-control"
+                    <input type="text" minlength="1" maxlength="50" value="" class="form-control"
                            id="author"
                            name="author"
                            placeholder="author">
@@ -48,7 +48,7 @@
             <div class="form-group">
                 <label for="country" class="col-sm-3 control-label">Country</label>
                 <div class="col-sm-9">
-                    <input type="text" minlength="1" maxlength="50" value="Unknown_Country" class="form-control"
+                    <input type="text" minlength="1" maxlength="50" value="" class="form-control"
                            id="country" name="country"
                            placeholder="country">
                 </div>
@@ -75,14 +75,16 @@
     </form>
 
 </section>
-<%--<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>--%>
 <script src="../resources/js/jquery-3.2.1.min.js"></script>
 <script src="../resources/js/jquery-ui.min.js"></script>
-<script src="../resources/js/auto-complete.min.js"></script>
+<script src="../resources/js/awesomplete.js"></script>
 <script src="../resources/js/config.js"></script>
 <script src="../resources/js/bookstore.js"></script>
 <script>
-    window.onload = updateWriters();
+    window.onload = function () {
+        updateWriters();
+        updateCountries();
+    };
 </script>
 </body>
 

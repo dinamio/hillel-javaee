@@ -3,6 +3,7 @@ package com.hillel.security.servlets;
 import com.hillel.model.User;
 import com.hillel.security.AuthHelper;
 import com.hillel.service.UserService;
+import com.hillel.servlets.BasicHttpServlet;
 import com.hillel.util.Message;
 import lombok.extern.slf4j.Slf4j;
 import org.mindrot.jbcrypt.BCrypt;
@@ -24,7 +25,7 @@ import static java.time.Duration.ofMinutes;
 @Slf4j
 @WebServlet("/login")
 @Component
-public class LoginServlet extends HttpServlet {
+public class LoginServlet extends BasicHttpServlet {
 
     @Autowired
     private UserService userService;
