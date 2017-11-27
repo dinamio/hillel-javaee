@@ -1,0 +1,64 @@
+
+/*.form-group{*/
+    /**/
+    /**/
+/*}*/
+
+
+#users_table {
+    width: 600px;
+    float: left;
+}
+
+#users_table thead {
+    display: table-header-group;
+    vertical-align: middle;
+    horiz-align: center;
+    border-color: black;
+    background-color: #abaeb0;
+}
+
+.jumbotron {
+    cursor: pointer;
+}
+
+#table_container {
+    position: relative;
+    width: 600px;
+    height: 70%;
+    /*float: left;*/
+    overflow-y: auto;
+    float: right;
+. pull-left();
+}
+
+#table_container thead {
+    display: table-header-group;
+    vertical-align: middle;
+    horiz-align: center;
+    border-color: black;
+    background-color: #abaeb0;
+}
+
+.animate {
+    -webkit-animation: animatezoom 0.4s;
+    animation: animatezoom 0.4s
+}
+
+@-webkit-keyframes animatezoom {
+    from {
+        -webkit-transform: scale(0)
+    }
+    to {
+        -webkit-transform: scale(1)
+    }
+}
+
+@keyframes animatezoom {
+    from {
+        transform: scale(0)
+    }
+    to {
+        transform: scale(1)
+    }
+}
