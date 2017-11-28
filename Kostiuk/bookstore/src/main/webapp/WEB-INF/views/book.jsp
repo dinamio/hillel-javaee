@@ -8,8 +8,8 @@
 <body>
 
 <div class="jumbotron">
+    <%@ include file="language_login.jsp" %>
     <div class="container" id="title" onclick=sendRedirectRequest("<c:url value="/"/>")>
-        <%@ include file="loginUser.jsp" %>
         <div><h1><c:out value="${book.title}"/></h1></div>
     </div>
 </div>

@@ -18,5 +18,3 @@
     <title>Bookstore</title>
 </head>
 
-
-

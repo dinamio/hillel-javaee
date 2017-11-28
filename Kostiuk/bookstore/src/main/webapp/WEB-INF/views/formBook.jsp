@@ -7,9 +7,9 @@
 
 <body>
 
-<div class="jumbotron" style="cursor: pointer" id="formHeader" onclick=sendRedirectRequest("<c:url value="/"/>")>
-    <div class="container">
-        <%@ include file="loginUser.jsp" %>
+<div class="jumbotron" style="cursor: pointer" id="formHeader">
+    <%@ include file="language_login.jsp" %>
+    <div class="container" onclick=sendRedirectRequest("<c:url value="/"/>")>
         <div><h1>Add new book to the store</h1></div>
     </div>
 </div>

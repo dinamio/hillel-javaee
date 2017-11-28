@@ -7,8 +7,9 @@
 <body>
 
 <div class="jumbotron">
+    <%@ include file="language_login.jsp" %>
     <div class="container ">
-        <h1>Bookstore</h1>
+        <h1><spring:message code="welcome.message"/></h1>
         <c:if test="${registerMessage!=null}">
             <h4><span class="label label-success"><c:out value="${registerMessage.value}"/></span></h4>
         </c:if>

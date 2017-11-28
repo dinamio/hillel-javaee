@@ -1,5 +1,3 @@
-<%@ include file="header.jsp" %>
-
 <div class="pull-right">
     <c:if test="${user!=null}">
         <h4>Current user:</h4><h4><b><c:out value="${user.firstName}  ${user.lastName}"/></b></h4>

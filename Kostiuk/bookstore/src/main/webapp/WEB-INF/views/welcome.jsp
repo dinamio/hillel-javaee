@@ -1,3 +1,4 @@
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <%@ include file="header.jsp" %>
 
 <head>
@@ -7,9 +8,9 @@
 <body>
 
 <div class="jumbotron">
+    <%@ include file="language_login.jsp" %>
     <div class="container">
-        <%@ include file="loginUser.jsp" %>
-        <h1>Bookstore</h1>
+        <h1><spring:message code="welcome.message"/></h1>
         <p>
             <a class="btn btn-primary btn-lg" href="<c:url value="/books"/>">Show books</a>
             <a class="btn btn-default btn-lg" href="<c:url value="/books/form"/>">Add new book</a>

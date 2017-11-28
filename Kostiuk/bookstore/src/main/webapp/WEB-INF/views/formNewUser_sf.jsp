@@ -8,6 +8,7 @@
 <body>
 
 <div class="jumbotron">
+    <%@ include file="language_login.jsp" %>
     <div class="container" id="formHeader" onclick=sendRedirectRequest("<c:url value="/"/>")>
         <div><h1>Register new user</h1></div>
     </div>

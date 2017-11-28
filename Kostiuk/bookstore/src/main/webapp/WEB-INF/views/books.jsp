@@ -6,9 +6,9 @@
 
 <body>
 
-<div class="jumbotron" onclick=sendRedirectRequest("<c:url value="/"/>")>
-    <div class="container">
-        <%@ include file="loginUser.jsp" %>
+<div class="jumbotron">
+    <%@ include file="language_login.jsp" %>
+    <div class="container" onclick=sendRedirectRequest("<c:url value="/"/>")>
         <div class="h1">Books
             <a class="btn btn-default btn-lg" href="<c:url value="/books/form"/>">Add new book</a>
         </div>

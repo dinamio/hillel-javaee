@@ -6,9 +6,9 @@
 
 <body>
 
-<div class="jumbotron" id="booksList" style="cursor: pointer" onclick=sendRedirectRequest("<c:url value="/"/>")>
-    <div class="container">
-        <%@ include file="loginUser.jsp" %>
+<div class="jumbotron" id="booksList" style="cursor: pointer">
+    <%@ include file="language_login.jsp" %>
+    <div class="container" onclick=sendRedirectRequest("<c:url value="/"/>")>
         <div class="h1">Users</div>
     </div>
 </div>
