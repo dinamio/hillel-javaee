@@ -94,7 +94,7 @@
             </div>
             <div class="form-group">
                 <div class="col-md-9">
-                    <label class="control-label col-md-2" for="bookImage">${image}</label>
+                    <label class="control-label col-md-2" for="bookImage">${image_msg}</label>
                     <div class="col-md-10">
                         <form:input id="bookImage" path="bookImage" type="file" cssClass="btn btn-info"/>
                     </div>
@@ -107,11 +107,11 @@
 
 <spring:url value="/js/jquery-3.2.1.min.js" var="jquery"/>
 <spring:url value="/js/awesomplete.js" var="awesomplete"/>
-<spring:url value="/js/bookstore.js" var="bookstore"/>
+<spring:url value="/js/bookstore.js" var="bookstore_js"/>
 <spring:url value="/js/config.js" var="config"/>
 <script src="${jquery}"></script>
 <script src="${awesomplete}"></script>
-<script src="${bookstore}"></script>
+<script src="${bookstore_js}"></script>
 <script src="${config}"></script>
 <script>
     window.onload = function () {

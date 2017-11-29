@@ -80,7 +80,7 @@
                     </td>
                 </tr>
                 <tr>
-                    <td>${viewers}</td>
+                    <td>${reviewers}</td>
                     <td>
                         <ul class="list-unstyled">
                             <c:forEach items="${book.reviewers}" var="reviewer">
@@ -99,7 +99,7 @@
     </div>
 
 </section>
-<spring:url value="/js/bookstore.js" var="bookstore"/>
-<script src="${bookstore}"></script>
+<spring:url value="/js/bookstore.js" var="bookstore_js"/>
+<script src="${bookstore_js}"></script>
 
 </body>

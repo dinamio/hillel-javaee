@@ -43,7 +43,7 @@
     <spring:message code="submit.message" var="submit"/>
     <spring:message code="added.by.message" var="added_by"/>
     <spring:message code="viewers.message" var="reviewers"/>
-    <spring:message code="image.message" var="image"/>
+    <spring:message code="image.message" var="image_msg"/>
     <spring:message code="back.to.catalog.message" var="back_to_catalog"/>
     <spring:message code="login.message" var="login"/>
     <spring:message code="logout.message" var="logout"/>

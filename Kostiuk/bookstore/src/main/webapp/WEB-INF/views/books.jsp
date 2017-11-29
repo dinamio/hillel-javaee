@@ -54,7 +54,7 @@
     <a class="btn btn-warning btn-sm pull-right col-md-1" onclick=toTop()>[ ${to_top} ]</a>
 </section>
 <spring:url value="/js/jquery-3.2.1.min.js" var="jquery"/>
-<spring:url value="/js/bookstore.js" var="bookstore"/>
+<spring:url value="/js/bookstore.js" var="bookstore_js"/>
 <script src="${jquery}"></script>
-<script src="${bookstore}"></script>
+<script src="${bookstore_js}"></script>
 </body>

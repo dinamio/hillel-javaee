@@ -8,7 +8,7 @@ import java.util.Optional;
 public interface WriterDao extends CrudRepository<Writer, Long> {
 
 
-    Optional<Writer> getByFullName(String fullName, boolean eager);
+    Optional<Writer> getByFullName(String fullName);
 
 
 }

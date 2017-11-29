@@ -94,7 +94,7 @@ public class BookServiceImpl implements BookService {
                 .collect(Collectors.toList());
 
         //Update author
-        Optional<Writer> authorOpt = writerService.getByFullName(authorName, true);
+        Optional<Writer> authorOpt = writerService.getByFullName(authorName);
         Writer author;
         if (authorOpt.isPresent()) {
             author = authorOpt.get();
@@ -110,7 +110,7 @@ public class BookServiceImpl implements BookService {
         //Update reviewers
         List<Writer> reviewers = Arrays.stream(reviewersNames)
                 .distinct()
-                .map(w -> writerService.getByFullName(w, false).orElseGet(() -> writerService.insert(new Writer(w)).get()))
+                .map(w -> writerService.getByFullName(w).orElseGet(() -> writerService.insert(new Writer(w)).get()))
                 .collect(Collectors.toList());
 
         //Insert or update the book
@@ -122,7 +122,7 @@ public class BookServiceImpl implements BookService {
         //Update or insertOrUpdate new Book
         Long id = bookFormDto.getId();
         Book book;
-        if (bookDao.exists(id)) {
+        if (id != null) {
             return update(id, b -> updateBook(b, bookFormDto, reviewers, author, user));
         } else {
             book = new Book();

@@ -47,15 +47,13 @@ public class WriterServiceImpl implements WriterService {
         return Optional.ofNullable(writer);
     }
 
-
-
     @Override
     public List<WriterNameDto> getAllWriterNames() {
         return getAll().stream().map(w-> new WriterNameDto(w.getId(), w.getFullName())).collect(Collectors.toList());
     }
 
     @Override
-    public Optional<Writer> getByFullName(String fullName, boolean eager) {
-        return writerDao.getByFullName(fullName, eager);
+    public Optional<Writer> getByFullName(String fullName) {
+        return writerDao.getByFullName(fullName);
     }
 }
