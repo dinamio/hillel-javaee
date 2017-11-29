@@ -7,7 +7,7 @@ import java.lang.annotation.Documented;
 import java.lang.annotation.Retention;
 import java.lang.annotation.Target;
 
-import static java.lang.annotation.ElementType.*;
+import static java.lang.annotation.ElementType.FIELD;
 import static java.lang.annotation.RetentionPolicy.RUNTIME;
 
 @Target({FIELD})
@@ -16,7 +16,7 @@ import static java.lang.annotation.RetentionPolicy.RUNTIME;
 @Documented
 public @interface OnCommaSeparated {
 
-    String message() default "stringCommaValidator.message";
+    String message() default "{stringCommaValidator.message}";
 
     Class<?>[] groups() default {};
 

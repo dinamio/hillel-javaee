@@ -27,24 +27,24 @@
                 <tr>
                     <th class="h3 success col-md-6">Book Info</th>
                     <th class="success col-md-6"><a class="btn btn-warning col-sm-8" type="_blank"
-                                                    href="<c:out value="${book.link}"/>">Go to wiki</a></th>
+                                                    href="<c:out value="${book.link}"/>">${go_to_wiki}</a></th>
                 </tr>
                 </thead>
                 <tbody>
                 <tr>
-                    <td><b>Title</b></td>
+                    <td><b>${title}</b></td>
                     <td><b><c:out value="${book.title}"/></b></td>
                 </tr>
                 <tr>
-                    <td>Author</td>
+                    <td>${author}</td>
                     <td><c:out value="${book.author.fullName}"/></td>
                 </tr>
                 <tr>
-                    <td>Language</td>
+                    <td>${language}</td>
                     <td><c:out value="${book.language}"/></td>
                 </tr>
                 <tr>
-                    <td>Country</td>
+                    <td>${country}</td>
                     <td>
                         <ul class="list-unstyled">
                             <c:forEach items="${book.author.countries}" var="country">
@@ -54,15 +54,15 @@
                     </td>
                 </tr>
                 <tr>
-                    <td>Year</td>
+                    <td>${year}</td>
                     <td><c:out value="${book.year}"/></td>
                 </tr>
                 <tr>
-                    <td>Pages</td>
+                    <td>${pages}</td>
                     <td><c:out value="${book.pages}"/></td>
                 </tr>
                 <tr>
-                    <td>Added by</td>
+                    <td>${added_by}</td>
                     <td>
                         <ul class="list-unstyled">
                             <li class="list-group-item" style="cursor: hand"
@@ -80,7 +80,7 @@
                     </td>
                 </tr>
                 <tr>
-                    <td>Viewers</td>
+                    <td>${viewers}</td>
                     <td>
                         <ul class="list-unstyled">
                             <c:forEach items="${book.reviewers}" var="reviewer">
@@ -92,8 +92,8 @@
                 </tbody>
             </table>
             <div class="button-bar">
-                <a href="<c:url value="/books" />" class="btn btn-primary">Back to catalog</a>
-                <a href="<c:url value="/books/edit?id=${book.id}" />" class="btn btn-primary">Edit</a>
+                <a href="<c:url value="/books" />" class="btn btn-primary">${back_to_catalog}</a>
+                <a href="<c:url value="/books/edit?id=${book.id}" />" class="btn btn-primary">${edit_book}</a>
             </div>
         </div>
     </div>

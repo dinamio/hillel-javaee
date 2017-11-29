@@ -1,5 +1,6 @@
 package com.hillel.service.impl;
 
+import com.google.common.collect.ImmutableList;
 import com.hillel.dao.UserDao;
 import com.hillel.model.User;
 import com.hillel.service.UserService;
@@ -18,43 +19,40 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public Optional<User> insert(User user) {
-        Optional.ofNullable(userDao.insert(user)).ifPresent(user::setId);
-        return Optional.of(user);
+        return Optional.ofNullable(userDao.save(user));
     }
 
     @Override
     public List<User> getAll() {
-        return userDao.getAll();
+        return ImmutableList.copyOf(userDao.findAll());
     }
 
     @Override
     public Optional<User> getByLogin(String login) {
-        return userDao.getByLogin(login);
+        return userDao.getByLoginName(login);
     }
 
     @Override
     public Optional<User> getEagerStateByLogin(String login) {
-        return userDao.getEagerStateByLogin(login);
+        return getByLogin(login);
+//        return userDao.getEagerStateByLoginName(login);
     }
 
     @Override
     public Optional<User> getById(Long id) {
-        return userDao.getById(id);
+        return Optional.ofNullable(userDao.findOne(id));
     }
 
     @Override
     public void delete(User user) {
-        Optional.ofNullable(user).map(User::getId).ifPresent(userDao::deleteById);
+        Optional.ofNullable(user).ifPresent(userDao::delete);
     }
 
     @Override
-    public void update(Long id, Consumer<User> updater) {
-        userDao.update(id, updater);
-    }
-
-    @Override
-    public void update(User entity, Consumer<User> updater) {
-        userDao.update(entity, updater);
+    public Optional<User> update(Long id, Consumer<User> updater) {
+        User user = userDao.findOne(id);
+        updater.accept(user);
+        return Optional.ofNullable(user);
     }
 
 }

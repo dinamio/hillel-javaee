@@ -33,13 +33,13 @@ public class BookFormDto {
 
     private String link;
 
-    @Size(min = 2, max = 50)
+    @Size(min = 2, max = 50, message = "{bookstore.constraints.Size.message}")
     private String title;
 
-    @Size(min = 2, max = 50)
+    @Size(min = 2, max = 50, message = "{bookstore.constraints.Size.message}")
     private String author;
 
-    @Size(min = 2, max = 50)
+    @Size(min = 2, max = 50, message = "{bookstore.constraints.Size.message}")
     private String language;
 
     @OnCommaSeparated

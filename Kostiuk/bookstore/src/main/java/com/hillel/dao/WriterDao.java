@@ -1,15 +1,12 @@
 package com.hillel.dao;
 
-import com.hillel.dto.WriterNameDto;
 import com.hillel.model.Writer;
+import org.springframework.data.repository.CrudRepository;
 
-import java.util.List;
 import java.util.Optional;
 
-public interface WriterDao extends BasicCRUD<Writer> {
+public interface WriterDao extends CrudRepository<Writer, Long> {
 
-
-    List<WriterNameDto> getAllWriterNames();
 
     Optional<Writer> getByFullName(String fullName, boolean eager);
 

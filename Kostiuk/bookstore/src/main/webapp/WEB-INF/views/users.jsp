@@ -1,7 +1,7 @@
 <%@ include file="header.jsp" %>
 
 <head>
-    <title>Users</title>
+    <title>${users}</title>
 </head>
 
 <body>
@@ -9,7 +9,7 @@
 <div class="jumbotron" id="booksList" style="cursor: pointer">
     <%@ include file="language_login.jsp" %>
     <div class="container" onclick=sendRedirectRequest("<c:url value="/"/>")>
-        <div class="h1">Users</div>
+        <div class="h1">${users}</div>
     </div>
 </div>
 <section class="container col-md-9 col-sm-offset-1">
@@ -18,9 +18,9 @@
             <thead class="thead-dark">
             <tr>
                 <th><h4>ID</h4></th>
-                <th><h4>First Name</h4></th>
-                <th><h4>Last Name</h4></th>
-                <th><h4>Login</h4></th>
+                <th><h4>${first_name}</h4></th>
+                <th><h4>${second_name}</h4></th>
+                <th><h4>${login}</h4></th>
             </tr>
             </thead>
             <tbody>
