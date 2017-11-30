@@ -2,24 +2,23 @@
   Created by IntelliJ IDEA.
   User: pikachu
   Date: 10/23/17
-  Time: 8:11 AM
+  Time: 8:09 AM
   To change this template use File | Settings | File Templates.
 --%>
+
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@ page session="true"%>
 <!DOCTYPE html>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
-<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <html lang="en">
 <head>
-    <sec:csrfInput/>
     <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <%--<meta http-equiv="X-UA-Compatible" content="IE=edge">--%>
+    <%--<meta name="viewport" content="width=device-width, initial-scale=1">--%>
     <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
-    <meta name="description" content="">
+    <%--<meta name="description" content="">--%>
+    <%--<meta name="author" content="">--%>
     <%--<link rel="icon" href="../../favicon.ico">--%>
 
     <title>Books</title>
@@ -28,10 +27,10 @@
     <link href="/css/bootstrap.min.css" rel="stylesheet">
 
     <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
-    <link href="/css/ie10-viewport-bug-workaround.css" rel="stylesheet">
+    <%--<link href="/css/ie10-viewport-bug-workaround.css" rel="stylesheet">--%>
 
     <!-- Custom styles for this template -->
-    <link href="/jumbotron-narrow.css" rel="stylesheet">
+    <%--<link href="/css/jumbotron-narrow.css" rel="stylesheet">--%>
 
     <!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
     <!--[if lt IE 9]>
@@ -59,12 +58,16 @@
         <h3 class="text-muted">Books</h3>
     </div>
 
-    <form>
+    <c:forEach items="${story}" var="prod">
         <div class="jumbotron">
-            <p><a class="btn btn-lg btn-success" role="button" type="submit" href="/books/show">Show</a></p>
-            <p><a class="btn btn-lg btn-success" role="button" type="submit" href="/books/add">Add new</a></p>
+            <h1>
+                Purchased by: ${prod.name}
+            </h1>
+            <p class=\"lead\"> </p>
+            <p>Description: ${prod.description}</p>
         </div>
-    </form>
+    </c:forEach>
+
 
 </div> <!-- /container -->
 

@@ -1,8 +1,8 @@
 <%--
   Created by IntelliJ IDEA.
   User: pikachu
-  Date: 10/20/17
-  Time: 7:51 PM
+  Date: 10/23/17
+  Time: 8:10 AM
   To change this template use File | Settings | File Templates.
 --%>
 
@@ -15,8 +15,10 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
     <meta name="description" content="">
     <meta name="author" content="">
+    <%--<link rel="icon" href="../../favicon.ico">--%>
 
     <title>Books</title>
 
@@ -30,7 +32,8 @@
     <link href="/jumbotron-narrow.css" rel="stylesheet">
 
     <!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
-    <!--[if lt IE 9]><script src="/js/ie8-responsive-file-warning.js"></script><![endif]-->
+    <!--[if lt IE 9]>
+    <script src="/js/ie8-responsive-file-warning.js"></script><![endif]-->
     <script src="/js/ie-emulation-modes-warning.js"></script>
 
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
@@ -42,7 +45,7 @@
 
 <body>
 
-<form   action="<c:url value="add" />" method="POST">
+<form>
 
     <div class="container">
         <div class="header clearfix">
@@ -57,36 +60,38 @@
         </div>
 
 
+        <c:forEach items="${products}" var="prod">
+            <div class="jumbotron">
+                <h1>
+                        ${prod.name}
+                </h1>
+                <p class=\"lead\">Id: ${prod.id} </p>
+                <p>Pages: ${prod.pages}</p>
+                <p>Publisher: ${prod.publisher}</p>
+                <p>Price: ${prod.price}</p>
+                <p>Authors:
+                    <c:forEach items="${prod.authors}" var="author">
+                        ${author.name},
+                    </c:forEach>
+                </p>
+                <p>Genres:
+                    <c:forEach items="${prod.genres}" var="genre">
+                        ${genre.genrename},
+                    </c:forEach>
+                </p>
+                <p><a class="btn btn-lg btn-success" role="button" href="/order/remove/${prod.id}"
+                      type="submit">Remove</a></p>
+            </div>
+        </c:forEach>
 
+        <form:form modelAttribute="totalPrice">
+            <h1>Total Price: ${totalPrice.price}</h1>
+            <div class="jumbotron">
+                <form:label path="price" name="price" id="price"/>
 
-        <div class="jumbotron">
-
-            <form:form modelAttribute="product">
-                <fieldset>
-
-                    <form:input path="name"  placeholder="Book name" cssClass="form-control"/>
-                    <br />
-
-                    <form:input path="pages" placeholder="Pages" cssClass="form-control"/>
-                    <br />
-
-                    <form:input name="authors" path="authors" placeholder="Authors" cssClass="form-control"/>
-                    <br />
-
-                    <form:input name="genres" path="genres" placeholder="Genres" cssClass="form-control"/>
-                    <br />
-
-                    <form:input path="publisher" placeholder="Publisher" cssClass="form-control"/>
-                    <br />
-
-                    <form:input path="price" placeholder="Price" cssClass="form-control"/>
-                    <br />
-                </fieldset>
-
-                <button class="btn btn-lg btn-success" role="button" type="submit">Add</button>
-            </form:form>
-        </div>
-
+                <p><a class="btn btn-lg btn-success" role="button" href="/order/complete" type="submit">Buy</a></p>
+            </div>
+        </form:form>
 
 
     </div> <!-- /container -->
