@@ -7,12 +7,52 @@ import javax.persistence.*;
 import java.util.List;
 
 @Entity
-@Table(name = "BookList")
-public class Book {
+public class BookList {
 
-    public Book(){}
+    @Id
+    @Column(name = "bookid")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
-    public Book(String name, int pages, List<Author> authors, List<Genre> genres, String publisher, int price) {
+    @Column(name = "bookname")
+    private String name;
+
+    @Column(name = "pages")
+    private Integer pages;
+
+    @Column(name = "Publisher")
+    private String publisher;
+
+    @Column(name = "price")
+    private Integer price;
+
+    @ManyToMany(cascade = CascadeType.MERGE)
+    @LazyCollection(LazyCollectionOption.FALSE)
+    @JoinTable(name = "book_author",
+            joinColumns = {
+                    @JoinColumn(name = "book_id")},
+            inverseJoinColumns = {
+                    @JoinColumn(name = "author_id")
+            })
+    private List<Author> authors;
+
+    @ManyToMany(cascade = CascadeType.MERGE)
+    @LazyCollection(LazyCollectionOption.FALSE)
+    @JoinTable(name = "book_genre",
+            joinColumns = {
+                    @JoinColumn(name = "book_id")},
+            inverseJoinColumns = {
+                    @JoinColumn(name = "genre_id")
+            })
+    private List<Genre> genres;
+
+    @ManyToMany(cascade = CascadeType.MERGE, mappedBy = "bookLists")
+    @LazyCollection(LazyCollectionOption.TRUE)
+    private List<OrderList> orderLists;
+
+    public BookList(){}
+
+    public BookList(String name, Integer pages, List<Author> authors, List<Genre> genres, String publisher, Integer price) {
         this.name = name;
         this.pages = pages;
         this.publisher = publisher;
@@ -21,57 +61,21 @@ public class Book {
         this.genres = genres;
     }
 
-    @Id
-    @Column(name = "bookid")
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    public BookList(Long id, String name, Integer pages, List<Author> authors, List<Genre> genres, String publisher, Integer price) {
+        this.id = id;
+        this.name = name;
+        this.pages = pages;
+        this.publisher = publisher;
+        this.price = price;
+        this.authors = authors;
+        this.genres = genres;
+    }
 
-    @Column(name = "BookName")
-    private String name;
-
-    @Column(name = "pages")
-    int pages;
-
-    @Column(name = "Publisher")
-    private String publisher;
-
-    @Column(name = "price")
-    private int price;
-
-    @ManyToMany
-    @LazyCollection(LazyCollectionOption.FALSE)
-    @JoinTable(name = "BookAuthor",
-            joinColumns = {
-                    @JoinColumn(name = "book_id")},
-            inverseJoinColumns = {
-                    @JoinColumn(name = "author_id")
-            })
-    private List<Author> authors;
-
-    @ManyToMany
-    @LazyCollection(LazyCollectionOption.FALSE)
-    @JoinTable(name = "BookGenre",
-            joinColumns = {
-                    @JoinColumn(name = "book_id")},
-            inverseJoinColumns = {
-                    @JoinColumn(name = "genre_id")
-            })
-    private List<Genre> genres;
-
-    @ManyToMany(fetch = FetchType.LAZY)
-    @JoinTable(name = "BookOrder",
-            joinColumns = {
-                    @JoinColumn(name = "book_id")},
-            inverseJoinColumns = {
-                    @JoinColumn(name = "order_id")
-            })
-    public List<Order> orders;
-
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -83,11 +87,11 @@ public class Book {
         this.name = name;
     }
 
-    public int getPages() {
+    public Integer getPages() {
         return pages;
     }
 
-    public void setPages(int pages) {
+    public void setPages(Integer pages) {
         this.pages = pages;
     }
 
@@ -99,11 +103,11 @@ public class Book {
         this.publisher = publisher;
     }
 
-    public int getPrice() {
+    public Integer getPrice() {
         return price;
     }
 
-    public void setPrice(int price) {
+    public void setPrice(Integer price) {
         this.price = price;
     }
 
@@ -123,17 +127,17 @@ public class Book {
         this.genres = genres;
     }
 
-    public List<Order> getOrders() {
-        return orders;
+    public List<OrderList> getOrderLists() {
+        return orderLists;
     }
 
-    public void setOrders(List<Order> orders) {
-        this.orders = orders;
+    public void setOrderLists(List<OrderList> orderLists) {
+        this.orderLists = orderLists;
     }
 
     @Override
     public String toString() {
-        return "Book{" +
+        return "BookList{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", pages=" + pages +

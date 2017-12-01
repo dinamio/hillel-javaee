@@ -1,14 +1,8 @@
 package edu.karazin.shop.dao;
 
-import edu.karazin.shop.model.Book;
+import edu.karazin.shop.model.BookList;
+import org.springframework.data.repository.CrudRepository;
 
-import java.util.List;
-
-public interface BookDataAccessObject {
-    boolean addNewBook(Book book);
-    Book getBookById(long id);
-    Book getBookByName(String name);
-    boolean removeById(long id);
-    boolean update(Book book);
-    List<Book> getAllBooks();
+public interface BookDataAccessObject extends CrudRepository<BookList, Long> {
+    BookList getBookByName(String name);
 }

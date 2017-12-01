@@ -1,9 +1,10 @@
 package edu.karazin.shop.dao;
 
 import edu.karazin.shop.model.Genre;
+import org.springframework.data.repository.CrudRepository;
 
-public interface GenreDataAccessObject {
-    Genre getGenreByName(String genrename);
-    Genre getGenreById(long id);
-    Genre createGenre(Genre genre);
+import java.util.List;
+
+public interface GenreDataAccessObject extends CrudRepository<Genre, Integer> {
+    Genre getGenreByGenrename(String genrename);
 }

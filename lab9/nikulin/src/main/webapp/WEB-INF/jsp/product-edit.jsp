@@ -45,15 +45,15 @@
 
 <body>
 
-<form action="<c:url value="books" />" method="POST">
+<form action="<c:url value="{id}" />" method="POST">
 
     <div class="container">
         <div class="header clearfix">
             <nav>
                 <ul class="nav nav-pills pull-right">
                     <li role="presentation" class="active"><a href="/books/menu">Home</a></li>
-                    <li role="presentation"><a href="#">About</a></li>
-                    <li role="presentation"><a href="#">Contact</a></li>
+                    <li role="presentation"><a href="/order">Basket</a></li>
+                    <li role="presentation"><a href="/profile">Profile</a></li>
                 </ul>
             </nav>
             <h3 class="text-muted">Books</h3>
@@ -65,16 +65,19 @@
 
             <form:form modelAttribute="product">
                 <fieldset>
+                    <form:input path="id" cssClass="form-control" readonly="true"/>
+                    <br/>
+
                     <form:input path="name" cssClass="form-control"/>
                     <br />
 
                     <form:input path="pages" cssClass="form-control"/>
                     <br />
 
-                    <form:input path="authors" cssClass="form-control"/>
+                    <form:input name="authors" path="authors" cssClass="form-control"/>
                     <br />
 
-                    <form:input path="genres" cssClass="form-control"/>
+                    <form:input name="genres" path="genres" cssClass="form-control"/>
                     <br />
 
                     <form:input path="publisher" cssClass="form-control"/>
@@ -86,32 +89,6 @@
 
                 <button class="btn btn-lg btn-success" role="button" type="submit" name="updateButton">Update</button>
             </form:form>
-
-            <%--<div class="form-group">--%>
-                <%--<input type="text" placeholder="Book id" name="BookId" id="BookId" class="form-control">--%>
-            <%--</div>--%>
-            <%--<div class="form-group">--%>
-                <%--<input type="text" placeholder="Book name" name="BookName" id="BookName" class="form-control">--%>
-            <%--</div>--%>
-            <%--<div class="form-group">--%>
-                <%--<input type="text" placeholder="Pages" name="Pages" id="Pages" class="form-control">--%>
-            <%--</div>--%>
-            <%--<div class="form-group">--%>
-                <%--<input type="text" placeholder="Author" name="BookAuthor" id="BookAuthor" class="form-control">--%>
-            <%--</div>--%>
-            <%--<div class="form-group">--%>
-                <%--<input type="text"--%>
-                       <%--placeholder="Fantasy, Comedy, Drama, Horror Fiction, Literary realism, Romance, Tragedy, Tragicomedy, Manga, Scientific, Programing"--%>
-                       <%--name="BookGenre" id="BookGenre" class="form-control">--%>
-            <%--</div>--%>
-            <%--<div class="form-group">--%>
-                <%--<input type="text" placeholder="Publisher" name="BookPublisher" class="form-control">--%>
-            <%--</div>--%>
-            <%--<div class="form-group">--%>
-                <%--<input type="text" placeholder="Price" name="BookPrice" class="form-control">--%>
-            <%--</div>--%>
-            <%--<input type="submit" name="updateButton" value="Update"/>--%>
-            <%--<button class="btn btn-lg btn-success" role="button" type="submit" name="updateButton">Update</button>>--%>
         </div>
 
 

@@ -51,44 +51,69 @@
         <nav>
             <ul class="nav nav-pills pull-right">
                 <li role="presentation" class="active"><a href="/books/menu">Home</a></li>
-                <li role="presentation"><a href="#">About</a></li>
-                <li role="presentation"><a href="#">Contact</a></li>
+                <li role="presentation"><a href="/order">Basket</a></li>
+                <li role="presentation"><a href="/profile">Profile</a></li>
             </ul>
         </nav>
         <h3 class="text-muted">Books</h3>
     </div>
 
-    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <script type="text/javascript">
-        $(document).ready(function () {
-            $('#submitButton').click(function () {
-                var genre = $('#bookGenre').val();
-                console.log(genre);
-                $.ajax({
-                    type: 'POST',
-                    data: {genre: genre},
-                    url: 'show',
-                    success: function (result) {
-                        $('#result1').html(result);
-                        document.getElementById('result1').innerHTML = result;
-                    }
-                })
-            })
-        })
-    </script>
+
 
     <div class="jumbotron">
         <div class="form-group">
-            <div class="form-group">
-                <input type="text" placeholder="Fantasy, Comedy, Drama, Horror Fiction, Literary realism, Romance, Tragedy, Tragicomedy, Manga, Scientific, Programing" name="bookGenre" id="bookGenre" class="form-control">
-            </div>
-            <input type = "submit" name = "submitButton" id="submitButton" value = "Show" />
+
+            <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+            <script type="text/javascript">
+                $(document).ready(function () {
+                    $('#searchText').keyup(function () {
+                        var genre = $('#searchText').val();
+                        console.log(genre);
+                        $.ajax({
+                            type: 'GET',
+                            data: {genre: genre},
+                            url: 'showhints',
+                            success: function (result) {
+                                $('#result1').html(result);
+                                document.getElementById('result1').innerHTML = result;
+                            }
+                        })
+                    })
+                })
+            </script>
+
+            <form:form modelAttribute="searchForm">
+                <form:input path="searchText" name="searchText" id="searchText" placeholder="Comedy, Tragicomedy, Satire, Horror Fiction, Fantasy, Drama, Mythology, Romance, Manga, Programming,  Scientific, Literary realism" cssClass="form-control"/>
+                <input type="submit" value="Search" class="btn btn-lg btn-success"/>
+            </form:form>
+            <p id="result1"></p>
         </div>
     </div>
 
-    <div id="result1">
-
-    </div>
+    <c:forEach items="${products}" var="prod">
+        <div class="jumbotron">
+            <h1>
+                    ${prod.name}
+            </h1>
+            <p class=\"lead\">Id: ${prod.id} </p>
+            <p>Pages: ${prod.pages}</p>
+            <p>Publisher: ${prod.publisher}</p>
+            <p>Price: ${prod.price}</p>
+            <p>Authors:
+                <c:forEach items="${prod.authors}" var="author">
+                    ${author.name},
+                </c:forEach>
+            </p>
+            <p>Genres:
+                <c:forEach items="${prod.genres}" var="genre">
+                    ${genre.genrename},
+                </c:forEach>
+            </p>
+            <p><a class="btn btn-lg btn-success" role="button" href="/books/${prod.id}" type="submit">Edit</a></p>
+            <p><a class="btn btn-lg btn-success" role="button" href="/books/remove/${prod.id}" type="submit">Remove</a></p>
+            <p><a class="btn btn-lg btn-success" role="button" href="/order/${prod.id}" type="submit">Add to bucket</a></p>
+        </div>
+    </c:forEach>
 
 
 </div> <!-- /container -->
