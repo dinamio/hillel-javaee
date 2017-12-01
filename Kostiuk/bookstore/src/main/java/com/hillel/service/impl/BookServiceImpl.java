@@ -1,5 +1,6 @@
 package com.hillel.service.impl;
 
+import com.google.common.collect.ImmutableList;
 import com.hillel.dao.BookDao;
 import com.hillel.dto.BookFormDto;
 import com.hillel.model.Book;
@@ -17,7 +18,6 @@ import org.springframework.stereotype.Service;
 
 import java.util.Arrays;
 import java.util.List;
-import java.util.Map;
 import java.util.Optional;
 import java.util.function.Consumer;
 import java.util.stream.Collectors;
@@ -28,49 +28,50 @@ import static com.hillel.util.Utils.splitOnCommas;
 @Service
 public class BookServiceImpl implements BookService {
 
+    private final BookDao bookDao;
+    private final WriterService writerService;
+    private final CountryService countryService;
+    private final UserService userService;
+
     @Autowired
-    private BookDao bookDao;
-    @Autowired
-    private WriterService writerService;
-    @Autowired
-    private CountryService countryService;
-    @Autowired
-    private UserService userService;
+    public BookServiceImpl(BookDao bookDao, WriterService writerService, CountryService countryService, UserService userService) {
+        this.bookDao = bookDao;
+        this.writerService = writerService;
+        this.countryService = countryService;
+        this.userService = userService;
+    }
 
     @Override
     public Optional<Book> getById(Long id) {
-        return bookDao.getById(id);
+        return Optional.ofNullable(bookDao.findOne(id));
     }
 
     @Override
     public void delete(Book book) {
-        Optional.ofNullable(book).map(Book::getId).ifPresent(bookDao::deleteById);
+        Optional.ofNullable(book).map(Book::getId).ifPresent(bookDao::delete);
     }
 
     @Override
     public Optional<Book> insert(Book book) {
-        Optional.ofNullable(bookDao.insert(book)).ifPresent(book::setId);
-        return Optional.of(book);
+        return Optional.ofNullable(bookDao.save(book));
     }
 
     @Override
-    public void update(Long id, Consumer<Book> updater) {
-        bookDao.update(id, updater);
-    }
-
-    @Override
-    public void update(Book entity, Consumer<Book> updater) {
-        bookDao.update(entity, updater);
+    public Optional<Book> update(Long id, Consumer<Book> updater) {
+        Book book = bookDao.findOne(id);
+        updater.accept(book);
+        return Optional.ofNullable(book);
     }
 
     @Override
     public List<Book> getAll() {
-        return bookDao.getAll();
+        return ImmutableList.copyOf(bookDao.findAll());
     }
 
     @Override
     public Optional<Book> getEagerStateById(Long id) {
-        return bookDao.getEagerStateById(id);
+//        return bookDao.getEagerStateById(id);
+        return getById(id);
     }
 
 
@@ -82,10 +83,10 @@ public class BookServiceImpl implements BookService {
 
     @Override
     @SneakyThrows
-    public Optional<Book> insertOrUpdate(BookFormDto dto) {
-        String[] countriesNames = splitOnCommas(dto.getCountries());
-        String[] reviewersNames = splitOnCommas(dto.getReviewers());
-        String authorName = dto.getAuthor();
+    public Optional<Book> insertOrUpdate(BookFormDto bookFormDto) {
+        String[] countriesNames = splitOnCommas(bookFormDto.getCountries());
+        String[] reviewersNames = splitOnCommas(bookFormDto.getReviewers());
+        String authorName = bookFormDto.getAuthor();
 
         //Update countries
         List<Country> countries = Arrays.stream(countriesNames)
@@ -93,14 +94,14 @@ public class BookServiceImpl implements BookService {
                 .collect(Collectors.toList());
 
         //Update author
-        Optional<Writer> authorOpt = writerService.getByFullName(authorName, true);
+        Optional<Writer> authorOpt = writerService.getByFullName(authorName);
         Writer author;
         if (authorOpt.isPresent()) {
             author = authorOpt.get();
             List<Country> currentCountries = author.getCountries();
             List<Country> newCountries = countries.stream().distinct().filter(c -> !currentCountries.contains(c)).collect(Collectors.toList());
             if (!newCountries.isEmpty()) {
-                writerService.update(author, wr -> wr.getCountries().addAll(newCountries));
+                writerService.update(author.getId(), wr -> wr.getCountries().addAll(newCountries));
             }
         } else {
             author = writerService.insert(new Writer(authorName, countries)).get();
@@ -109,25 +110,25 @@ public class BookServiceImpl implements BookService {
         //Update reviewers
         List<Writer> reviewers = Arrays.stream(reviewersNames)
                 .distinct()
-                .map(w -> writerService.getByFullName(w, false).orElseGet(() -> writerService.insert(new Writer(w)).get()))
+                .map(w -> writerService.getByFullName(w).orElseGet(() -> writerService.insert(new Writer(w)).get()))
                 .collect(Collectors.toList());
 
         //Insert or update the book
-        dto.setLink("https://www.google.com/search?q=" + dto.getTitle());
+        bookFormDto.setLink("https://www.google.com/search?q=" + bookFormDto.getTitle());
 
         //Update user
-        User user = userService.getByLogin(dto.getUser()).get();
+        User user = userService.getByLogin(bookFormDto.getUser()).get();
 
         //Update or insertOrUpdate new Book
-        Long id = dto.getId();
-        Book book = bookDao.update(id, b -> updateBook(b, dto, reviewers, author, user)).orElseGet(() -> {
-            Book result = new Book();
-            updateBook(result, dto, reviewers, author, user);
-            result.setId(bookDao.insert(result));
-            return result;
-        });
-
-        return Optional.of(book);
+        Long id = bookFormDto.getId();
+        Book book;
+        if (id != null) {
+            return update(id, b -> updateBook(b, bookFormDto, reviewers, author, user));
+        } else {
+            book = new Book();
+            updateBook(book, bookFormDto, reviewers, author, user);
+            return insert(book);
+        }
     }
 
     @SneakyThrows
@@ -144,8 +145,4 @@ public class BookServiceImpl implements BookService {
         target.setUser(user);
     }
 
-    @Override
-    public List<Book> getByParams(Map<String, Object> params) {
-        return bookDao.getByParams(params);
-    }
 }

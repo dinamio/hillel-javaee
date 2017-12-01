@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.validation.Valid;
 import java.util.List;
 import java.util.Optional;
 
@@ -59,8 +60,10 @@ public class BookController {
 
 
     @PostMapping
-    public String addNewBook(@ModelAttribute BookFormDto book, BindingResult result, HttpServletRequest httpRequest) {
-        log.info("receive: {}", book);
+    public String addNewBook(@ModelAttribute("book") @Valid BookFormDto book, BindingResult result, HttpServletRequest httpRequest) {
+        if (result.hasErrors()) {
+            return "formBook";
+        }
         String userName = ((User) httpRequest.getAttribute("user")).getLoginName();
         book.setUser(userName);
         bookService.insertOrUpdate(book);

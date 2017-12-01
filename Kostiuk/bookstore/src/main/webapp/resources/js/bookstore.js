@@ -54,7 +54,7 @@ function updateWriters() {
         async: true,
         success: function (data) {
             console.log(data);
-            let list = data.writerNameDtoList.map(function (i) {
+            let list = data.map(function (i) {
                 return i.fullName;
             });
             new Awesomplete(document.getElementById('author'), {

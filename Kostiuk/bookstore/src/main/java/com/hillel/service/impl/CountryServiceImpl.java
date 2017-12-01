@@ -1,5 +1,6 @@
 package com.hillel.service.impl;
 
+import com.google.common.collect.ImmutableList;
 import com.hillel.dao.CountryDao;
 import com.hillel.model.Country;
 import com.hillel.service.CountryService;
@@ -18,33 +19,30 @@ public class CountryServiceImpl implements CountryService {
 
     @Override
     public Optional<Country> insert(Country country) {
-        Optional.ofNullable(countryDao.insert(country)).ifPresent(country::setId);
-        return Optional.of(country);
+        return Optional.ofNullable(countryDao.save(country));
     }
 
     @Override
     public List<Country> getAll() {
-        return countryDao.getAll();
+        return ImmutableList.copyOf(countryDao.findAll());
     }
 
     @Override
     public void delete(Country country) {
-        Optional.ofNullable(country).map(Country::getId).ifPresent(countryDao::deleteById);
+        Optional.ofNullable(country).ifPresent(countryDao::delete);
     }
 
     @Override
-    public void update(Long id, Consumer<Country> updater) {
-        countryDao.update(id, updater);
+    public Optional<Country> update(Long id, Consumer<Country> updater) {
+        Country country = countryDao.findOne(id);
+        updater.accept(country);
+        return Optional.ofNullable(country);
     }
 
-    @Override
-    public void update(Country entity, Consumer<Country> updater) {
-        countryDao.update(entity, updater);
-    }
 
     @Override
     public Optional<Country> getById(Long id) {
-        return countryDao.getById(id);
+        return Optional.ofNullable(countryDao.findOne(id));
     }
 
     @Override

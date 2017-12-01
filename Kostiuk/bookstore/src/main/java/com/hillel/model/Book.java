@@ -3,8 +3,6 @@ package com.hillel.model;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
-import org.hibernate.annotations.FetchMode;
-import org.hibernate.annotations.FetchProfile;
 
 import javax.persistence.*;
 import java.util.List;
@@ -13,12 +11,6 @@ import java.util.List;
 @Setter
 @Entity
 @Table(name = "books")
-@Access(AccessType.FIELD)
-@FetchProfile(name = "book_full_info", fetchOverrides = {
-        @FetchProfile.FetchOverride(entity = Book.class, association = "reviewers", mode = FetchMode.JOIN),
-        @FetchProfile.FetchOverride(entity = Book.class, association = "user", mode = FetchMode.JOIN),
-        @FetchProfile.FetchOverride(entity = Book.class, association = "author", mode = FetchMode.JOIN)
-})
 public class Book {
 
     public Book() {

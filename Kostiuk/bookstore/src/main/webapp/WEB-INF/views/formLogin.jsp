@@ -1,15 +1,16 @@
 <%@ include file="header.jsp" %>
 
 <head>
-    <title>Login</title>
+    <title>${login}</title>
 </head>
 
 
 <body>
 
 <div class="jumbotron">
+    <%@ include file="language_login.jsp" %>
     <div class="container" id="formHeader" onclick=sendRedirectRequest("<c:url value="/"/>")>
-        <div><h1>Login to bookstore</h1></div>
+        <div><h1>${login_to_bookstore}</h1></div>
     </div>
 </div>
 
@@ -20,25 +21,25 @@
     <form role="form" class="form-horizontal" name="userSecurityDto" method="post"
           action="${pageContext.request.contextPath}/login">
         <fieldset>
-            <legend>Enter the valid credentials.</legend>
+            <legend>${enter_credentials}</legend>
             <div class="form-group">
-                <label for="login" class="col-sm-3 control-label">Login</label>
+                <label for="login" class="col-sm-3 control-label">${login}</label>
                 <div class="col-sm-9">
                     <input type="text" minlength="1" maxlength="50" required="required" class="form-control" id="login"
                            name="login"
-                           placeholder="login">
+                           placeholder="${login}">
                 </div>
             </div>
             <div class="form-group">
-                <label for="password" class="col-sm-3 control-label">Password</label>
+                <label for="password" class="col-sm-3 control-label">${password}</label>
                 <div class="col-sm-9">
                     <input type="password" minlength="1" maxlength="50" required="required" class="form-control"
                            id="password"
                            name="password"
-                           placeholder="password">
+                           placeholder="${password}">
                 </div>
             </div>
-            <button type="submit" class="btn btn-primary">Login</button>
+            <button type="submit" class="btn btn-primary">${login}</button>
         </fieldset>
     </form>
 

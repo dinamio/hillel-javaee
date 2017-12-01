@@ -8,8 +8,9 @@
 <body>
 
 <div class="jumbotron">
+    <%@ include file="language_login.jsp" %>
     <div class="container" id="formHeader" onclick=sendRedirectRequest("<c:url value="/"/>")>
-        <div><h1>Register new user</h1></div>
+        <div><h1>${register_new_user}</h1></div>
     </div>
 </div>
 
@@ -24,7 +25,7 @@
         <fieldset>
             <legend>Please enter credentials</legend>
             <div class="form-group">
-                <label for="firstName" class="col-sm-3 control-label">First name</label>
+                <label for="firstName" class="col-sm-3 control-label">${first_name}</label>
                 <div class="col-sm-9">
                     <input type="text" minlength="3" maxlength="50" required="required" class="form-control"
                            id="firstName"
@@ -33,7 +34,7 @@
                 </div>
             </div>
             <div class="form-group">
-                <label for="lastName" class="col-sm-3 control-label">Second Name</label>
+                <label for="lastName" class="col-sm-3 control-label">${second_name}</label>
                 <div class="col-sm-9">
                     <input type="text" minlength="3" maxlength="50" required="required" class="form-control"
                            id="lastName"
@@ -42,7 +43,7 @@
                 </div>
             </div>
             <div class="form-group">
-                <label for="login" class="col-sm-3 control-label">Login</label>
+                <label for="login" class="col-sm-3 control-label">${login}</label>
                 <div class="col-sm-9">
                     <input type="text" minlength="4" maxlength="20" required="required" class="form-control" id="login"
                            name="loginName"
@@ -50,7 +51,7 @@
                 </div>
             </div>
             <div class="form-group">
-                <label for="password" class="col-sm-3 control-label">Password</label>
+                <label for="password" class="col-sm-3 control-label">${password}</label>
                 <div class="col-sm-9">
                     <input type="password" minlength="4" maxlength="20" class="form-control" id="password"
                            name="encodedPassword"
@@ -58,7 +59,7 @@
                 </div>
             </div>
             <div class="form-group">
-                <label for="password" class="col-sm-3 control-label">Password</label>
+                <label for="password" class="col-sm-3 control-label">${password}</label>
                 <div class="col-sm-9">
                     <input type="password" minlength="1" maxlength="50" required="required" class="form-control"
                            id="confirm_password"

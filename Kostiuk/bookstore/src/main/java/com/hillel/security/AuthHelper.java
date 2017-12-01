@@ -11,7 +11,10 @@ import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
 import org.mindrot.jbcrypt.BCrypt;
 
-import java.security.SecureRandom;
+import java.io.IOException;
+import java.net.URISyntaxException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.time.temporal.TemporalAmount;
@@ -24,8 +27,17 @@ public class AuthHelper {
     @Getter
     @Setter
     private static User currentUser;
-    private static byte[] secret = SecureRandom.getSeed(1024);
+    private static byte[] secret;
     private static String issuer = "com.hillel.kostiuk";
+
+
+    static {
+        try {
+            secret = Files.readAllBytes(Paths.get(Thread.currentThread().getContextClassLoader().getResource("crypto/secret.key").toURI()));
+        } catch (IOException | URISyntaxException e) {
+            e.printStackTrace();
+        }
+    }
 
     public static Optional<String> generateToken(String login, TemporalAmount time) {
         Algorithm algorithm = Algorithm.HMAC256(secret);

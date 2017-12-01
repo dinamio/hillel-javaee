@@ -12,5 +12,5 @@ public interface WriterService extends BasicCRUDService<Writer> {
     List<WriterNameDto> getAllWriterNames();
 
 
-    Optional<Writer> getByFullName(String fullName, boolean eager);
+    Optional<Writer> getByFullName(String fullName);
 }

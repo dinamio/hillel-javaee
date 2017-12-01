@@ -2,13 +2,14 @@ package com.hillel.dao;
 
 import com.hillel.model.User;
 import lombok.NonNull;
+import org.springframework.data.repository.CrudRepository;
 
 import java.util.Optional;
 
-public interface UserDao extends BasicCRUD<User> {
+public interface UserDao extends CrudRepository<User, Long> {
 
-    Optional<User> getByLogin(@NonNull String login);
+    Optional<User> getByLoginName(@NonNull String login);
 
-    Optional<User> getEagerStateByLogin(@NonNull String login);
+//    Optional<User> getEagerStateByLoginName(@NonNull String login);
 
 }
