@@ -29,7 +29,7 @@ To change this template use File | Settings | File Templates.
     <link href="css/ie10-viewport-bug-workaround.css" rel="stylesheet">
 
     <!-- Custom styles for this template -->
-    <link href="jumbotron-narrow.css" rel="stylesheet">
+    <link href="css/jumbotron-narrow.css" rel="stylesheet">
 
     <!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
     <!--[if lt IE 9]><script src="js/ie8-responsive-file-warning.js"></script><![endif]-->
@@ -49,7 +49,7 @@ To change this template use File | Settings | File Templates.
         <nav>
             <ul class="nav nav-pills pull-right">
                 <li role="presentation" class="active"><a href="#">Home</a></li>
-                <li role="presentation"><a href="#">About</a></li>
+                <li role="presentation"><a href="#">Bucket</a></li>
                 <li role="presentation"><a href="#">Contact</a></li>
             </ul>
         </nav>

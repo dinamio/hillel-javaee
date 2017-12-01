@@ -5,11 +5,13 @@
   Time: 11:40 AM
   To change this template use File | Settings | File Templates.
 --%>
+<%@ page session="true"%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!DOCTYPE html>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <html lang="en">
 <head>
     <meta charset="utf-8">
@@ -20,7 +22,7 @@
     <meta name="author" content="">
     <link rel="icon" href="../../favicon.ico">
 
-    <title>Signin Template for Bootstrap</title>
+    <title>SignIn</title>
 
     <!-- Bootstrap core CSS -->
     <link href="/css/bootstrap.min.css" rel="stylesheet">
@@ -49,19 +51,23 @@
 <div class="container">
 
 
-    <form action="<c:url value="login" />" method="POST">
-        <h2 class="form-signin-heading">Please sign in</h2>
-        <label for="login" class="sr-only">Login</label>
-        <input type="text" id="login" name="login" class="form-control" placeholder="login" required autofocus>
-        <label for="password" class="sr-only">Password</label>
-        <input type="password" id="password" name="password" class="form-control" placeholder="password" required>
-        <div class="checkbox">
-            <label>
-                <input type="checkbox" value="remember-me"> Remember me
-            </label>
-        </div>
-        <button class="btn btn-lg btn-primary btn-block" type="submit" name="signIn">Sign in</button>
-        <button class="btn btn-lg btn-primary btn-block" type="submit" name="signUp" >Sign up</button>
+    <form action="<c:url value="login" />" method="POST" class="form-signin">
+        <form:form modelAttribute="userData">
+            <sec:csrfInput/>
+            <h2 class="form-signin-heading">Please sign in</h2>
+            <form:input path="id" style="display: none;"/>
+            <label for="username" class="sr-only">Login</label>
+            <form:input path="username" type="text" id="username" name="username" class="form-control" placeholder="username"/>
+            <label for="password" class="sr-only">Password</label>
+            <form:input path="password"  type="password" id="password" name="password" class="form-control" placeholder="password"/>
+            <div class="checkbox">
+                <label>
+                    <input type="checkbox" value="remember-me"> Remember me
+                </label>
+            </div>
+            <button class="btn btn-lg btn-primary btn-block" type="submit" name="SignIn">Sign in</button>
+            <button class="btn btn-lg btn-primary btn-block" type="submit" name="signUp" >Sign up</button>
+        </form:form>
     </form>
 </div> <!-- /container -->
 

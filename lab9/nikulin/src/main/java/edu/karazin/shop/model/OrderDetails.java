@@ -1,42 +1,27 @@
 package edu.karazin.shop.model;
 
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
+
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 public class OrderDetails {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int orderdetails;
-
-    private int orderid;
-
-    private long bookid;
+    @Column(name = "order_details_id")
+    private int orderDetailsId;
 
     private int quantity;
 
-    public int getOrderdetails() {
-        return orderdetails;
+    public int getOrderDetailsId() {
+        return orderDetailsId;
     }
 
-    public void setOrderdetails(int orderdetails) {
-        this.orderdetails = orderdetails;
-    }
-
-    public int getOrderid() {
-        return orderid;
-    }
-
-    public void setOrderid(int orderid) {
-        this.orderid = orderid;
-    }
-
-    public long getBookid() {
-        return bookid;
-    }
-
-    public void setBookid(long bookid) {
-        this.bookid = bookid;
+    public void setOrderDetailsId(int orderDetailsId) {
+        this.orderDetailsId = orderDetailsId;
     }
 
     public int getQuantity() {
@@ -47,15 +32,15 @@ public class OrderDetails {
         this.quantity = quantity;
     }
 
-    public Order getOrder() {
-        return order;
+    public List<OrderList> getOrderList() {
+        return orderList;
     }
 
-    public void setOrder(Order order) {
-        this.order = order;
+    public void setOrderList(List<OrderList> orderList) {
+        this.orderList = orderList;
     }
 
-    @ManyToOne(fetch = FetchType.EAGER, optional = false)
-    @JoinColumn(name = "orderid", referencedColumnName = "orderid", insertable = false, updatable = false)
-    private Order order;
+    @ManyToMany(mappedBy = "orderDetails")
+    @LazyCollection(LazyCollectionOption.FALSE)
+    private List<OrderList> orderList;
 }

@@ -1,13 +1,19 @@
 package edu.karazin.shop.dao;
 
-import edu.karazin.shop.model.Order;
-import edu.karazin.shop.model.OrderDetails;
+import edu.karazin.shop.model.BookList;
+import edu.karazin.shop.model.OrderList;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.CrudRepository;
 
-public interface OrderDataAccessObject {
+import java.util.List;
 
-    Order getOrderById(int id);
+public interface OrderDataAccessObject extends CrudRepository<OrderList, Integer> {
 
-    int createOrder(Order order, OrderDetails orderDetails);
+//    boolean completeOrder(int id);
 
-    boolean completeOrder(int id);
+    @Query(value = "select b.bookLists from OrderList b where b.orderId=:id")
+    List<BookList> getOrderBooks(int id);
+
+//    @Query(value = "select o from OrderList o where o.userid=:id")
+    OrderList getOrderListByUserId(Integer id);
 }

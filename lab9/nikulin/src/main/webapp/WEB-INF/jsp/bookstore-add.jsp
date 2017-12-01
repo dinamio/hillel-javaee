@@ -48,9 +48,9 @@
         <div class="header clearfix">
             <nav>
                 <ul class="nav nav-pills pull-right">
-                    <li role="presentation" class="active"><a href="bookstore-menu.jsp">Home</a></li>
-                    <li role="presentation"><a href="#">About</a></li>
-                    <li role="presentation"><a href="#">Contact</a></li>
+                    <li role="presentation" class="active"><a href="/books/menu">Home</a></li>
+                    <li role="presentation"><a href="/order">Basket</a></li>
+                    <li role="presentation"><a href="/profile">Profile</a></li>
                 </ul>
             </nav>
             <h3 class="text-muted">Books</h3>
@@ -60,25 +60,31 @@
 
 
         <div class="jumbotron">
-            <div class="form-group">
-                <input type="text" placeholder="Book name" name="BookName" class="form-control">
-            </div>
-            <div class="form-group">
-                <input type="text" placeholder="Pages" name="Pages" class="form-control">
-            </div>
-            <div class="form-group">
-                <input type="text" placeholder="Author" name="BookAuthor" class="form-control">
-            </div>
-            <div class="form-group">
-                <input type="text" placeholder="Fantasy, Comedy, Drama, Horror Fiction, Literary realism, Romance, Tragedy, Tragicomedy, Manga, Scientific, Programing" name="BookGenre" class="form-control">
-            </div>
-            <div class="form-group">
-                <input type="text" placeholder="Publisher" name="BookPublisher" class="form-control">
-            </div>
-            <div class="form-group">
-                <input type="text" placeholder="Price" name="BookPrice" class="form-control">
-            </div>
-            <button class="btn btn-lg btn-success" role="button" type="submit" name="submitButton">Add new book</button>
+
+            <form:form modelAttribute="product">
+                <fieldset>
+
+                    <form:input path="name"  placeholder="Book name" cssClass="form-control"/>
+                    <br />
+
+                    <form:input path="pages" placeholder="Pages" cssClass="form-control"/>
+                    <br />
+
+                    <form:input name="authors" path="authors" placeholder="Authors" cssClass="form-control"/>
+                    <br />
+
+                    <form:input name="genres" path="genres" placeholder="Genres" cssClass="form-control"/>
+                    <br />
+
+                    <form:input path="publisher" placeholder="Publisher" cssClass="form-control"/>
+                    <br />
+
+                    <form:input path="price" placeholder="Price" cssClass="form-control"/>
+                    <br />
+                </fieldset>
+
+                <button class="btn btn-lg btn-success" role="button" type="submit">Add</button>
+            </form:form>
         </div>
 
 

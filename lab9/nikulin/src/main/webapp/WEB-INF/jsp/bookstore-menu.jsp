@@ -6,18 +6,20 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page session="true"%>
 <!DOCTYPE html>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <html lang="en">
 <head>
+    <sec:csrfInput/>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
     <meta name="description" content="">
-    <meta name="author" content="">
     <%--<link rel="icon" href="../../favicon.ico">--%>
 
     <title>Books</title>
@@ -50,21 +52,17 @@
         <nav>
             <ul class="nav nav-pills pull-right">
                 <li role="presentation" class="active"><a href="/books/menu">Home</a></li>
-                <li role="presentation"><a href="#">About</a></li>
-                <li role="presentation"><a href="#">Contact</a></li>
+                <li role="presentation"><a href="/order">Basket</a></li>
+                <li role="presentation"><a href="/profile">Profile</a></li>
             </ul>
         </nav>
         <h3 class="text-muted">Books</h3>
     </div>
 
-    <form action="<c:url value="menu" />" method="POST">
-        <div class="jumbotron" action="${pageContext.request.contextPath}/books/menu" method="POST">
-            <button class="btn btn-lg btn-success" role="button" type="submit" name="show">Show all
-                books</button>
-            <br/>
-            <button class="btn btn-lg btn-success" role="button" type="submit" name="add">Add new
-                book</button>
-            <br/>
+    <form>
+        <div class="jumbotron">
+            <p><a class="btn btn-lg btn-success" role="button" type="submit" href="/books/show">Show</a></p>
+            <p><a class="btn btn-lg btn-success" role="button" type="submit" href="/books/add">Add new</a></p>
         </div>
     </form>
 

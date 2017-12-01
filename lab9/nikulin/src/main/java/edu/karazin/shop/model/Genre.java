@@ -1,5 +1,8 @@
 package edu.karazin.shop.model;
 
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
+
 import javax.persistence.*;
 import java.util.List;
 
@@ -12,14 +15,15 @@ public class Genre {
 
     private String genrename;
 
-    @ManyToMany(fetch = FetchType.EAGER)
-    @JoinTable(name = "BookGenre",
+    @ManyToMany
+    @LazyCollection(LazyCollectionOption.FALSE)
+    @JoinTable(name = "book_genre",
             joinColumns = {
                     @JoinColumn(name = "genre_id")},
             inverseJoinColumns = {
                     @JoinColumn(name = "book_id")
             })
-    private List<Book> books;
+    private List<BookList> bookLists;
 
     public int getGenreid() {
         return genreid;
@@ -37,18 +41,16 @@ public class Genre {
         this.genrename = genrename;
     }
 
-    public List<Book> getBooks() {
-        return books;
+    public List<BookList> getBookLists() {
+        return bookLists;
     }
 
-    public void setBooks(List<Book> books) {
-        this.books = books;
+    public void setBookLists(List<BookList> bookLists) {
+        this.bookLists = bookLists;
     }
 
     @Override
     public String toString() {
-        return "Genre{" + " id=" + + genreid +
-                "genrename='" + genrename + '\'' +
-                '}';
+        return genrename;
     }
 }
