@@ -9,15 +9,16 @@ import java.util.Set;
 public class Author {
     @Id
     @GeneratedValue
-    private Integer author_id;
+    @Column(name = "author_id")
+    private Integer authorID;
     private String name;
     private String surname;
 
     @ManyToMany(mappedBy = "authors", fetch = FetchType.LAZY)
     private Set<Book> books;
 
-    public Integer getAuthor_id() {
-        return author_id;
+    public Integer getAuthorID() {
+        return authorID;
     }
 
     public String getName() {
@@ -32,8 +33,8 @@ public class Author {
         this.books = books;
     }
 
-    public void setAuthor_id(Integer author_id) {
-        this.author_id = author_id;
+    public void setAuthorID(Integer authorID) {
+        this.authorID = authorID;
     }
 
     public void setName(String name) {
