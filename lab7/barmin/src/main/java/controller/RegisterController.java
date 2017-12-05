@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.HttpServlet;
 
+import static utils.Encryption.cryptWithMD5;
+
 
 @Controller
 @RequestMapping(path ="/unregistered/registerController")
@@ -24,7 +26,7 @@ public class RegisterController extends HttpServlet {
         if(userDao.findOne(username) == null){
             User user = new User();
             user.setUsername(username);
-            user.setPassHex(password);
+            user.setPassHex(cryptWithMD5(password));
             userDao.save(user);
             return "redirect:/";
         }else {

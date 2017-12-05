@@ -5,8 +5,6 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-import static utils.Encryption.cryptWithMD5;
-
 @Entity
 @Table(name = "Users")
 public class User {
@@ -28,7 +26,7 @@ public class User {
     }
 
     public void setPassHex(String passHex) {
-        this.passHex = cryptWithMD5(passHex);
+        this.passHex = passHex;
     }
 
     @Override

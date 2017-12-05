@@ -1,12 +1,14 @@
 package utils;
 
+import com.mysql.jdbc.StringUtils;
+
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
 public class Encryption {
     public static String cryptWithMD5(String pass){
         try {
-            if(pass == null || pass.length() < 1){
+            if(StringUtils.isNullOrEmpty(pass)){
                 return "";
             }
             MessageDigest md = MessageDigest.getInstance("MD5");

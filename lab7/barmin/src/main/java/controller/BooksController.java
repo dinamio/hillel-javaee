@@ -1,7 +1,5 @@
 package controller;
 
-import com.google.gson.Gson;
-import com.google.gson.JsonObject;
 import database.dao.BookDao;
 import database.dao.UserDao;
 import database.model.Author;
@@ -57,9 +55,7 @@ public class BooksController extends HttpServlet {
 
     @ResponseStatus(HttpStatus.OK)
     @RequestMapping(method = RequestMethod.DELETE)
-    protected void deleteBook(@RequestBody String string) {
-        JsonObject data = new Gson().fromJson(string, JsonObject.class);
-        Integer bookId = Integer.parseInt(data.get("id").getAsString());
-        bookDao.delete(bookId);
+    protected void deleteBook(@RequestParam("id") String id ) {
+        bookDao.delete(Integer.parseInt(id));
     }
 }

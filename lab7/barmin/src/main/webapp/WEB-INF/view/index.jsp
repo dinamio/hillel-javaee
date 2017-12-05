@@ -24,13 +24,11 @@
             <legend>Please Login</legend>
             <div class="form-group">
                 <label for="username"><b>Username</b></label>
-                <%--<input type="text"   name="uname"><br>--%>
                 <input type="text" class="form-control" placeholder="Enter Username"  id="username" name="username"/>
             </div>
             <div class="form-group">
                 <label></label>
                 <label for="password"><b>Password</b></label>
-                <%--<input type="password"  name="psw"><br>--%>
                 <input type="password" class="form-control" placeholder="Enter Password" id="password" name="password"/>
             </div>
             <div class="form-actions">
@@ -44,37 +42,9 @@
 
     <form action="/unregistered/register" method="get">
         <button class="btn btn-block btn-danger btn-lg" type="submit">Register</button>
-        <input type="hidden"
-               name="${_csrf.parameterName}"
-               value="${_csrf.token}"/>
     </form>
 
 </div>
-
-<%--<body>--%>
-<%--<div tiles:fragment="content">--%>
-<%--<form name="f" th:action="@{/login}" method="post">--%>
-<%--<fieldset>--%>
-<%--<legend>Please Login</legend>--%>
-<%--<div th:if="${param.error}" class="alert alert-error">--%>
-<%--Invalid username and password.--%>
-<%--</div>--%>
-<%--<div th:if="${param.logout}" class="alert alert-success">--%>
-<%--You have been logged out.--%>
-<%--</div>--%>
-<%--<label for="username">Username</label>--%>
-<%--<input type="text" id="username" name="username"/>--%>
-<%--<label for="password">Password</label>--%>
-<%--<input type="password" id="password" name="password"/>--%>
-<%--<div class="form-actions">--%>
-<%--<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>.--%>
-<%--<button type="submit" class="btn">Log in</button>--%>
-<%--</div>--%>
-<%--</fieldset>--%>
-<%--</form>--%>
-<%--</div>--%>
-<%--</body>--%>
-
 
 </body>
 </html>
