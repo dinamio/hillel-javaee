@@ -79,14 +79,13 @@
     </form>
 
 </section>
+
+<spring:url value="/js/bookstore.js" var="bookstore_js"/>
+<script src="${bookstore_js}"></script>
 <script>
     document.getElementById("formHeader").style.cursor = "pointer";
 
-    function sendRedirectRequest(url) {
-        window.location = url
-    }
-
-    var password = document.getElementById("password")
+    let password = document.getElementById("password")
         , confirm_password = document.getElementById("confirm_password");
 
     function validatePassword() {
@@ -99,7 +98,6 @@
 
     password.onchange = validatePassword;
     confirm_password.onkeyup = validatePassword;
-
 </script>
 </body>
 

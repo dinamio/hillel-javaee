@@ -5,6 +5,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import javax.persistence.Transient;
 import java.util.Date;
 
 @Getter
@@ -14,4 +15,6 @@ import java.util.Date;
 public class AuthDetails {
 
     private Date expirationDate;
+
+    private String reCaptchaResponse;
 }

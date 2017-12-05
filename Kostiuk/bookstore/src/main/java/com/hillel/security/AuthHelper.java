@@ -6,6 +6,7 @@ import com.auth0.jwt.algorithms.Algorithm;
 import com.auth0.jwt.exceptions.JWTVerificationException;
 import com.auth0.jwt.interfaces.DecodedJWT;
 import com.hillel.model.User;
+import com.hillel.security.reCaptcha.ReCaptchaVerifier;
 import com.hillel.service.UserService;
 import lombok.NonNull;
 import lombok.extern.slf4j.Slf4j;
@@ -28,6 +29,8 @@ import java.util.Date;
 import java.util.Optional;
 import java.util.stream.Stream;
 
+import static com.hillel.util.Utils.isValidString;
+
 @Slf4j
 @Component
 public class AuthHelper {
@@ -36,6 +39,9 @@ public class AuthHelper {
 
     @Autowired
     private UserService userService;
+
+    @Autowired
+    private ReCaptchaVerifier reCaptchaVerifier;
 
     @Autowired
     private PasswordEncoder passwordEncoder;
@@ -62,14 +68,21 @@ public class AuthHelper {
         try {
             String login = request.getParameter("login");
             String password = request.getParameter("password");
+            String reCaptchaResponse = request.getParameter("reCaptchaResponse");
 
-            LocalDateTime localDate = LocalDateTime.now().plus(Duration.ofMinutes(Long.parseLong(lifetimeMinutes)));
-            Date expirationDate = Date.from(localDate.atZone(ZoneId.systemDefault()).toInstant());
+            if (isValidString(login)
+                    && isValidString(password)
+                    && isValidString(reCaptchaResponse)
+                    && reCaptchaVerifier.verify(reCaptchaResponse).isSuccess()) {
 
-            User user = userService.getByLogin(login).orElse(null);
-            if (user != null && passwordEncoder.matches(password, user.getPassword())) {
-                AuthDetails authDetails = new AuthDetails(expirationDate);
-                return Optional.of(new UserAuthentication(user, authDetails));
+                LocalDateTime localDate = LocalDateTime.now().plus(Duration.ofMinutes(Long.parseLong(lifetimeMinutes)));
+                Date expirationDate = Date.from(localDate.atZone(ZoneId.systemDefault()).toInstant());
+
+                User user = userService.getByLogin(login).orElse(null);
+                if (user != null && passwordEncoder.matches(password, user.getPassword())) {
+                    AuthDetails authDetails = new AuthDetails(expirationDate, reCaptchaResponse);
+                    return Optional.of(new UserAuthentication(user, authDetails));
+                }
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -126,5 +139,6 @@ public class AuthHelper {
     public String encodePassword(String password) {
         return passwordEncoder.encode(password);
     }
+
 
 }

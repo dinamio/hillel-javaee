@@ -44,7 +44,6 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
         JWTAuthenticationFilter authenticationFilter = new JWTAuthenticationFilter(authHelper, authenticationManager());
         JWTAuthorizationFilter authorizationFilter = new JWTAuthorizationFilter(authHelper, authenticationManager());
         http
-                .csrf().disable()
                 .authorizeRequests()
                 .antMatchers("/login", "/user/register", "/start").permitAll()
                 .antMatchers("/resources/**", "/css/**", "/js/**").permitAll()
@@ -63,7 +62,8 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .logoutSuccessUrl("/")
                 .and()
                 .addFilter(authenticationFilter)
-                .addFilter(authorizationFilter);
+                .addFilter(authorizationFilter)
+                .csrf().disable();
     }
 
 }

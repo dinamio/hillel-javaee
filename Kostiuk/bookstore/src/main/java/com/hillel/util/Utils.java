@@ -9,7 +9,7 @@ import java.io.UnsupportedEncodingException;
 
 public class Utils {
 
-    public static boolean isValidInput(String value) {
+    public static boolean isValidString(String value) {
         return value != null && !value.isEmpty();
     }
 
