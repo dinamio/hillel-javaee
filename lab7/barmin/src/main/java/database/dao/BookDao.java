@@ -1,11 +1,7 @@
 package database.dao;
 
 import database.model.Book;
+import org.springframework.data.repository.CrudRepository;
 
-import java.util.List;
-
-public interface BookDao {
-    List<Book> getAllBooks();
-    void addBook(Book arg);
-    void deleteBook(String id);
+public interface BookDao extends CrudRepository<Book, Integer> {
 }

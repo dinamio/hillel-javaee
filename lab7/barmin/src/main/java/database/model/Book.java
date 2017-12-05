@@ -22,7 +22,7 @@ public class Book {
 
     @ManyToOne
     @JoinColumn(name = "user_id")
-    private User user_id;
+    private User userID;
 
     public int getId() {
         return id;
@@ -47,12 +47,12 @@ public class Book {
     }
 
 
-    public User getUser_id() {
-        return user_id;
+    public User getUserID() {
+        return userID;
     }
 
-    public void setUser_id(User user_id) {
-        this.user_id = user_id;
+    public void setUserID(User user_id) {
+        this.userID = user_id;
     }
 
     public void setAuthors(Set<Author> authors) {
@@ -77,7 +77,7 @@ public class Book {
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", authors=" + authors.toString() +
-                ", user_id=" + user_id.getId() +
+                ", user_id=" + userID +
                 '}';
     }
 }

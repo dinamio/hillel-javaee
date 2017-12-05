@@ -1,9 +1,7 @@
 package database.dao;
 
 import database.model.User;
+import org.springframework.data.repository.CrudRepository;
 
-public interface UserDao {
-    User getUserByID(String id);
-    int loginUser(String username, String password);
-    boolean registerUser(String username, String password);
+public interface UserDao extends CrudRepository<User, String>{
 }
