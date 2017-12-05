@@ -58,7 +58,6 @@
 </section>
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
 <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.6/angular.js"></script>
-<script type="text/javascript" src="https://www.google.com/recaptcha/api.js" async defer></script>
 <spring:url value="/js/login.js" var="loginJS"/>
 <spring:url value="/js/config.js" var="config"/>
 <spring:url value="/js/bookstore.js" var="bookstore_js"/>
