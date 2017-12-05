@@ -5,6 +5,8 @@ import com.hillel.dao.UserDao;
 import com.hillel.model.User;
 import com.hillel.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -32,11 +34,6 @@ public class UserServiceImpl implements UserService {
         return userDao.getByLoginName(login);
     }
 
-    @Override
-    public Optional<User> getEagerStateByLogin(String login) {
-        return getByLogin(login);
-//        return userDao.getEagerStateByLoginName(login);
-    }
 
     @Override
     public Optional<User> getById(Long id) {
@@ -55,4 +52,8 @@ public class UserServiceImpl implements UserService {
         return Optional.ofNullable(user);
     }
 
+    @Override
+    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+        return getByLogin(username).get();
+    }
 }

@@ -7,6 +7,8 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.HttpServletRequest;
 
+import java.security.Principal;
+
 import static com.hillel.util.Utils.redirectTo;
 
 @Controller
@@ -14,8 +16,8 @@ import static com.hillel.util.Utils.redirectTo;
 public class WelcomeController {
 
     @GetMapping
-    public String getWelcomePage(HttpServletRequest httpRequest) {
-        if (httpRequest.getAttribute("user") == null) {
+    public String getWelcomePage(Principal principal) {
+        if (principal == null) {
             return redirectTo("start");
         }
         return redirectTo("welcome");
@@ -28,7 +30,7 @@ public class WelcomeController {
 
 
     @GetMapping("/start")
-    public String start(RedirectAttributes redirectAttributes) {
+    public String start() {
         return "startPage";
     }
 }

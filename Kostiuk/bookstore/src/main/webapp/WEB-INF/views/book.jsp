@@ -93,7 +93,9 @@
             </table>
             <div class="button-bar">
                 <a href="<c:url value="/books" />" class="btn btn-primary">${back_to_catalog}</a>
-                <a href="<c:url value="/books/edit?id=${book.id}" />" class="btn btn-primary">${edit_book}</a>
+                <sec:authorize access="hasAuthority('ADMIN')">
+                    <a href="<c:url value="/books/edit?id=${book.id}" />" class="btn btn-primary">${edit_book}</a>
+                </sec:authorize>
             </div>
         </div>
     </div>

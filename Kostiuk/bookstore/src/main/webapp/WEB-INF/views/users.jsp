@@ -24,13 +24,12 @@
             </tr>
             </thead>
             <tbody>
-            <c:forEach items="${users}" var="user">
-                <tr>
+            <c:forEach items="${all_users}" var="user">
                 <tr onclick="updateUserBooks(${user.id})">
-                    <td><h5><c:out value="#${user.id}"/></h5></td>
-                    <td><h5><c:out value="${user.firstName}"/></h5></td>
-                    <td><h5><c:out value="${user.lastName}"/></h5></td>
-                    <td><h5><c:out value="${user.loginName}"/></h5></td>
+                <td><h5><c:out value="#${user.id}"/></h5></td>
+                <td><h5><c:out value="${user.firstName}"/></h5></td>
+                <td><h5><c:out value="${user.lastName}"/></h5></td>
+                <td><h5><c:out value="${user.loginName}"/></h5></td>
                 </tr>
             </c:forEach>
             </tbody>

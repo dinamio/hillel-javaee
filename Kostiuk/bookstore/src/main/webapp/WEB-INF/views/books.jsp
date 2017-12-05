@@ -10,7 +10,9 @@
     <%@ include file="language_login.jsp" %>
     <div class="container" onclick=sendRedirectRequest("<c:url value="/"/>")>
         <div class="h1">${booksMsg}
-            <a class="btn btn-default btn-lg" href="<c:url value="/books/form"/>">${add_new_book}</a>
+            <sec:authorize access="hasAuthority('ADMIN')">
+                <a class="btn btn-default btn-lg" href="<c:url value="/books/form"/>">${add_new_book}</a>
+            </sec:authorize>
         </div>
     </div>
 </div>
@@ -44,8 +46,10 @@
                 <td>
                     <a class="btn btn-primary btn-sm"
                        href="<c:url value="/books/${book.id}" />">${about_book}</a>
-                    <a class="btn btn-danger btn-sm" href="" type="button"
-                       onclick=sendDeleteRequest("<c:url value="/books/delete?id=${book.id}"/>")>${delete}</a>
+                    <sec:authorize access="hasAuthority('ADMIN')">
+                        <div class="btn btn-danger btn-sm" type="button"
+                             onclick=sendDeleteRequest("<c:url value="/books/delete?id=${book.id}"/>")>${delete}</div>
+                    </sec:authorize>
                 </td>
             </tr>
         </c:forEach>

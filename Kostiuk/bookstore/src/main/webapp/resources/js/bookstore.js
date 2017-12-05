@@ -1,5 +1,6 @@
 function updateUserBooks(userID) {
     let booksUrl = connectionOptions.url + ":" + connectionOptions.port + "/rest/users/" + userID + "/books";
+    console.log(booksUrl);
     let container = $("#table_container");
     container.fadeOut(200, function () {
         $.ajax({
@@ -105,9 +106,13 @@ let multiAwesomplete = function (element, list) {
 
 
 function sendDeleteRequest(url) {
+    console.log('DELETE BOOk' + url);
     $.ajax({
         type: "DELETE",
-        url: url
+        url: url,
+        success: function () {
+            location.reload();
+        }
     });
 }
 

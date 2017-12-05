@@ -15,7 +15,9 @@
         <h1>${welcome}</h1>
         <p>
             <a class="btn btn-primary btn-lg" href="<c:url value="/books"/>">${show_books}</a>
-            <a class="btn btn-default btn-lg" href="<c:url value="/books/form"/>">${add_new_book}</a>
+            <sec:authorize access="hasAuthority('ADMIN')">
+                <a class="btn btn-default btn-lg" href="<c:url value="/books/form"/>">${add_new_book}</a>
+            </sec:authorize>
             <a class="btn btn-default btn-lg" href="<c:url value="/users"/>">${show_users}</a>
         </p>
     </div>

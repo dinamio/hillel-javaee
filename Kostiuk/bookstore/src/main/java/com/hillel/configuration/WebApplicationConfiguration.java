@@ -1,19 +1,18 @@
 package com.hillel.configuration;
 
 
-import com.hillel.security.interceptor.SecurityInterceptor;
 import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.support.ReloadableResourceBundleMessageSource;
 import org.springframework.validation.beanvalidation.LocalValidatorFactoryBean;
-import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.LocaleResolver;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 import org.springframework.web.servlet.i18n.CookieLocaleResolver;
 import org.springframework.web.servlet.i18n.LocaleChangeInterceptor;
+import org.springframework.web.servlet.resource.PathResourceResolver;
 
 import java.util.Locale;
 
@@ -23,17 +22,13 @@ public class WebApplicationConfiguration extends WebMvcConfigurerAdapter {
 
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
-        registry.addResourceHandler("/css/**").addResourceLocations("/resources/css/").setCachePeriod(0);
+        registry.addResourceHandler("/css/**").addResourceLocations("/resources/css/", "classpath:/css/")
+                .setCachePeriod(0)
+                .resourceChain(true)
+                .addResolver(new PathResourceResolver());
         registry.addResourceHandler("/img/**").addResourceLocations("/resources/img/").setCachePeriod(0);
         registry.addResourceHandler("/js/**").addResourceLocations("/resources/js/").setCachePeriod(0);
     }
-
-//    @Bean
-//    public CommonsMultipartResolver multipartResolver() {
-//        CommonsMultipartResolver multipartResolver = new CommonsMultipartResolver();
-//        multipartResolver.setDefaultEncoding("UTF-8");
-//        return multipartResolver;
-//    }
 
 
     @Bean(name = "validator")
@@ -54,18 +49,10 @@ public class WebApplicationConfiguration extends WebMvcConfigurerAdapter {
 
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
-        registry.addInterceptor(securityInterceptor())
-                .addPathPatterns("/*")
-                .excludePathPatterns("/login", "/user/register", "/start");
         registry.addInterceptor(localeChangeInterceptor())
                 .addPathPatterns("/*");
     }
 
-
-    @Bean
-    public HandlerInterceptor securityInterceptor() {
-        return new SecurityInterceptor();
-    }
 
     @Bean
     public LocaleChangeInterceptor localeChangeInterceptor() {

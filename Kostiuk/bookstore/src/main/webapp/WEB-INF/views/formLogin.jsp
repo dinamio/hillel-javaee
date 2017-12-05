@@ -22,6 +22,7 @@
           action="${pageContext.request.contextPath}/login">
         <fieldset>
             <legend>${enter_credentials}</legend>
+            <input name="${_csrf.parameterName}" value="${_csrf.token}" type="hidden">
             <div class="form-group">
                 <label for="login" class="col-sm-3 control-label">${login}</label>
                 <div class="col-sm-9">
