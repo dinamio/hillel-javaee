@@ -11,7 +11,7 @@ public class StringCommaValidator implements ConstraintValidator<OnCommaSeparate
     }
 
     public boolean isValid(String string, ConstraintValidatorContext context) {
-        return string.trim().matches("[a-zA-Z\\s,]+");
+        return string.trim().replace(" ","").matches("[a-zA-Z\\s,]+");
     }
 
 }

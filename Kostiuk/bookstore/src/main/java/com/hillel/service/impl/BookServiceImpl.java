@@ -60,6 +60,7 @@ public class BookServiceImpl implements BookService {
     public Optional<Book> update(Long id, Consumer<Book> updater) {
         Book book = bookDao.findOne(id);
         updater.accept(book);
+        bookDao.save(book);
         return Optional.ofNullable(book);
     }
 
@@ -67,13 +68,6 @@ public class BookServiceImpl implements BookService {
     public List<Book> getAll() {
         return ImmutableList.copyOf(bookDao.findAll());
     }
-
-    @Override
-    public Optional<Book> getEagerStateById(Long id) {
-//        return bookDao.getEagerStateById(id);
-        return getById(id);
-    }
-
 
     @Override
     public List<Book> getByTitle(String title) {

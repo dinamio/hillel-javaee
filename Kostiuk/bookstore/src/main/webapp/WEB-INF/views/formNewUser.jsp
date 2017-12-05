@@ -23,7 +23,7 @@
     <form role="form" class="form-horizontal" name="bookFormDto" method="post"
           action="${pageContext.request.contextPath}/user/register">
         <fieldset>
-            <legend>Please enter credentials</legend>
+            <legend>${enter_credentials}</legend>
             <div class="form-group">
                 <label for="firstName" class="col-sm-3 control-label">${first_name}</label>
                 <div class="col-sm-9">
@@ -50,11 +50,18 @@
                            placeholder="login">
                 </div>
             </div>
+            <%--<sec:authorize access="hasAuthority('ADMIN')">--%>
+            <%--<div class="form-check form-check-inline">--%>
+            <%--<label class="form-check-label">--%>
+            <%--<input class="form-check-input" type="checkbox"  name="admin_role"> ADMIN--%>
+            <%--</label>--%>
+            <%--</div>--%>
+            <%--</sec:authorize>--%>
             <div class="form-group">
                 <label for="password" class="col-sm-3 control-label">${password}</label>
                 <div class="col-sm-9">
                     <input type="password" minlength="4" maxlength="20" class="form-control" id="password"
-                           name="encodedPassword"
+                           name="password"
                            placeholder="password">
                 </div>
             </div>

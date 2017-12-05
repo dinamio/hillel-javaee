@@ -1,25 +1,20 @@
 package com.hillel.model;
 
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.hibernate.annotations.FetchMode;
-import org.hibernate.annotations.FetchProfile;
+import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
+import java.util.Collection;
 import java.util.List;
 
 @Getter
 @Setter
 @Entity
-@Access(AccessType.FIELD)
 @Table(name = "users")
-@FetchProfile(name = "eager_profile", fetchOverrides = {
-        @FetchProfile.FetchOverride(entity = User.class, association = "books", mode = FetchMode.JOIN),
-})
-public class User {
-
-    public User() {
-    }
+@NoArgsConstructor
+public class User implements UserDetails {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -35,9 +30,30 @@ public class User {
     private String loginName;
 
     @Column(name = "encoded_password")
-    private String encodedPassword;
+    private String password;
+
+    @Column(name = "account_non_expired")
+    private boolean accountNonExpired;
+
+    @Column(name = "account_non_locked")
+    private boolean accountNonLocked;
+
+    @Column(name = "credentials_non_expired")
+    private boolean credentialsNonExpired;
+
+    @Column(name = "enabled")
+    private boolean enabled;
+
+    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @JoinTable(name = "user_role", joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "role_id"))
+    private Collection<Role> authorities;
 
     @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
     private List<Book> books;
 
+    @Override
+    public String getUsername() {
+        return loginName;
+    }
 }

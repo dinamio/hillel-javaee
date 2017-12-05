@@ -9,8 +9,6 @@ import java.util.Optional;
 
 public interface BookService extends BasicCRUDService<Book> {
 
-    Optional<Book> getEagerStateById(@NonNull Long id);
-
     List<Book> getByTitle(@NonNull String title);
 
     Optional<Book> insertOrUpdate(BookFormDto bookFormDto);

@@ -2,16 +2,19 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
-<%--<meta http-equiv="content-type" content="text/html; charset=UTF-8">--%>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+
 
 <!DOCTYPE html>
 <html lang="en">
 <head>
+
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <spring:url value="/css/yeti.css" var="_css"/>
     <spring:url value="/css/bookstore.css" var="bookstore_css"/>
     <spring:url value="/css/awesomplete.css" var="awesomplete_css"/>
+    <%--<c:url var="main_css" value="../../resources/css/yeti.css"/>--%>
     <link rel="stylesheet" type="text/css" media="screen" href="${_css}"/>
     <link rel="stylesheet" type="text/css" media="screen" href="${bookstore_css}"/>
     <link rel="stylesheet" type="text/css" media="screen" href="${awesomplete_css}"/>
