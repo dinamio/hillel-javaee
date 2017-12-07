@@ -11,11 +11,12 @@ public class Author {
     @GeneratedValue
     private Integer id;
 
+  //  @Column(name = "author_name", nullable = false)
     @Column(name = "author_name")
     private String authorName;
 
     //////////////////////////////
-    @ManyToMany(fetch = FetchType.EAGER, mappedBy = "authors")
+    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "authors")
     private List<Book> books;
     //////////////////////////////
 

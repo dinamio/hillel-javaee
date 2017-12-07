@@ -1,5 +1,6 @@
 package com.hillel.bookstorespringboot.controller;
 
+import com.hillel.bookstorespringboot.dao.AuthorDao;
 import com.hillel.bookstorespringboot.dao.BookDao;
 import com.hillel.bookstorespringboot.dao.UserDao;
 import com.hillel.bookstorespringboot.dto.BookDTO;
@@ -30,7 +31,10 @@ public class BookController {
     private BookDTO bookDTO;
 
     @Autowired
-    UserDao userDao;
+    private UserDao userDao;
+
+    @Autowired
+    private AuthorDao authorDao;
 
 // +++
     @RequestMapping(value = "/book", method = RequestMethod.GET)
@@ -56,20 +60,20 @@ public class BookController {
 
 // TODO: org.hibernate.TransientPropertyValueException: object references an unsaved transient instance - save the transient instance before flushing : com.hillel.bookstorespringboot.model.Book.user -> com.hillel.bookstorespringboot.model.User; nested exception is java.lang.IllegalStateException: org.hibernate.TransientPropertyValueException: object references an unsaved transient instance - save the transient instance before flushing : com.hillel.bookstorespringboot.model.Book.user -> com.hillel.bookstorespringboot.model.User
     @RequestMapping(value = "/add", method = RequestMethod.POST)
-    public String setAddBook(@ModelAttribute(name = "book") BookDTO bookDTO, Principal principal) { // BookDTO bookDTO - ???????
+    public String setAddBook(@ModelAttribute(name = "book") BookDTO bookDTO, Principal principal) {
 
         String bookName = bookDTO.getBookName();
         List<Author> listAuthors = listFromString(bookDTO.getAuthors());
 
-        User user = new User("username");
-    //    User u = userDao.findOne(1);
+//        for (Author a: listAuthors) {
+//            if (authorDao.findAuthorsByAuthorName(a.getAuthorName()).isEmpty()) {
+//                authorDao.save(new Author(a.getAuthorName()));
+//            }
+//        }
 
+        User user = userDao.findUserByUserName(principal.getName());
 
-
-     //   user.setUserName(principal.getName());  TODO: раскомментировать после настройки security
-        Book book = new Book(bookName, listAuthors, user);
-
-// TODO: Связать bookDao с bookDTO (Service?)
+        Book book = new Book(bookName, listAuthors, user);//
         bookDao.save(book);
         return "redirect:/book/book";
     }

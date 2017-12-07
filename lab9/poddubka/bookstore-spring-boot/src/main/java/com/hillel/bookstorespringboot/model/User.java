@@ -23,7 +23,7 @@ public class User {
     @Column(name = "role")
     private String role;
 
-    @OneToMany(mappedBy = "user")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
     private List<Book> books;
 
     public User() {

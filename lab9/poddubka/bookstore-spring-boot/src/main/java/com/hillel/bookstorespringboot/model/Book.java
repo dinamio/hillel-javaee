@@ -16,12 +16,14 @@ public class Book {
     private String bookName;
 
     @ManyToOne(fetch = FetchType.EAGER)
+ //   @JoinColumn(name = "user_id", nullable = false)
     @JoinColumn(name = "user_id")
     private User user;
 
-    @ManyToMany(fetch = FetchType.EAGER)
+    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinTable(name = "items",
             joinColumns = {@JoinColumn(name = "book_id")},
+  //          inverseJoinColumns = {@JoinColumn(name = "author_id", nullable = false)})
             inverseJoinColumns = {@JoinColumn(name = "author_id")})
     private List<Author> authors;
 
