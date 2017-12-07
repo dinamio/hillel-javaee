@@ -1,0 +1,23 @@
+group 'com.hillel.kostiuk'
+version '1.0-SNAPSHOT'
+
+apply plugin: 'java'
+
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
+repositories {
+    mavenCentral()
+}
+
+jar {
+    manifest {
+        attributes 'Implementation-Title': 'FizzBuzz'
+        attributes("Main-Class": "com.hillel.kostiuk.fizzbuzz.FizzBuzzTest" )
+        attributes("Application-Name": "fizzBuzz" )
+    }
+}
+
+dependencies {
+
+}
