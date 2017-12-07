@@ -1,6 +1,7 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
@@ -66,6 +67,7 @@
             <td width="50%">${book.showAuthors(book.authors)}</td>
             <td width="50%">${book.user.getUserName()}</td>
             <td>
+                <%--<sec:authentication property="principal.username" />--%>
             <form:form action="/book/delete/${book.getId()}">
                 <input type="submit" value="<spring:message code="book.del"/>">
             </form:form>
@@ -73,17 +75,19 @@
                 <input type="submit" value="<spring:message code="book.select"/>">
             </form:form>
 
+
             </td>
         </tr>
         </c:forEach>
     </table>
 </c:if>
 <br>
-<%--references???  "/addBook" -> http://localhost:8080/addBook? No message available--%>
-<%--references???  "book/addBook" -> http://localhost:8080/book/book/addBook? No message available--%>
-<%--КАК ПОПАСТЬ НА http://localhost:8080/book/addBook ??? --%>
+
 <form:form action="/book/addBook" method="get" align="center">
     <input type="submit" value="<spring:message code="book.title"/>">
+</form:form>
+<form:form action="/security/registration" method="get" align="center">
+    <input type="submit" value="<spring:message code="user.registration"/>">
 </form:form>
 </body>
 </html>

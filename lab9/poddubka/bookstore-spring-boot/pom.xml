@@ -78,6 +78,11 @@
 			<artifactId>jackrabbit-webdav</artifactId>
 			<version>1.5.0</version>
 		</dependency>
+		<dependency>
+			<groupId>org.springframework.security</groupId>
+			<artifactId>spring-security-taglibs</artifactId>
+			<version>4.2.3.RELEASE</version>
+		</dependency>
 	</dependencies>
 
 	<build>

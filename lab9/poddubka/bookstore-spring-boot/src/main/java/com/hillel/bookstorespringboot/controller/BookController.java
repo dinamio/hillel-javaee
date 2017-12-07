@@ -53,7 +53,10 @@ public class BookController {
 
 // +++
     @RequestMapping(value = "/addBook", method = RequestMethod.GET)
-    public String getAddBookPage(Model model) {
+    public String getAddBookPage(Model model, Principal principal) {
+        if(principal == null) {
+            return "security/registration";
+        }
         model.addAttribute("book", bookDTO );
         return "book/addBook";
     }
@@ -85,11 +88,35 @@ public class BookController {
         return "redirect:/book/book";
     }
 
+
+    @RequestMapping(value = "/change/{id}", method = RequestMethod.GET)
+    public String changeBook(@PathVariable Integer id, Model model) {
+
+        model.addAttribute("book", bookDao.findOne(id));
+
+        return "book/update";
+    }
+
+
 // TODO: Сделать страницу(форму) для редактирования
-    @PutMapping(value = "update/{id}")
-    public String updateBook(@RequestBody Book book, @PathVariable Integer id) {
+    @RequestMapping(value = "/update/{id}", method = RequestMethod.POST)
+    public String updateBook(@ModelAttribute(name = "bookDTO") BookDTO bookDTO, @PathVariable Integer id, Principal principal) {
+        String bookName = bookDTO.getBookName();
+        List<Author> listAuthors = listFromString(bookDTO.getAuthors());
+        User user = userDao.findUserByUserName(principal.getName());
+        Book book = new Book(bookName, listAuthors, user);
         book.setId(id);
         bookDao.save(book);
         return "redirect:/book/book";
     }
+
+//    @PutMapping(value = "/update/{id}")
+//    public String updateBook(@RequestBody Book book, @PathVariable Integer id) {
+//        book.setId(id);
+//        bookDao.save(book);
+//        return "redirect:/book/book";
+//    }
+
+
+
 }

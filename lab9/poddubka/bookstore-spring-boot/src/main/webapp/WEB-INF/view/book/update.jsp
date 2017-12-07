@@ -29,11 +29,15 @@
                 <td><form:input path="authors"/></td>
             <tr>
                 <%--<td><input type="submit" value="<spring:message code="book.add"/>"></td>--%>
-                <form:form action="/book/update/${book.getId()}">
-                    <input type="submit" value="<spring:message code="book.edit"/>">
-                </form:form>
+
             </tr>
         </table>
+        <form:form action="/book/update/${book.getId()}" method="get" modelAttribute="bookDTO">
+            <input type="submit" value="<spring:message code="book.edit"/>">
+            <input type="hidden"
+            name="${_csrf.parameterName}"
+            value="${_csrf.token}">
+        </form:form>
     </form:form>
 </body>
 </html>

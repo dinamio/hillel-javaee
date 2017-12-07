@@ -38,6 +38,13 @@ public class User {
         this.userPassword = userPassword;
     }
 
+    public User(String userName, String userPassword, Boolean enable, String role) {
+        this.userName = userName;
+        this.userPassword = userPassword;
+        this.enable = enable;
+        this.role = role;
+    }
+
     public List<Book> getBooks() {
         return books;
     }

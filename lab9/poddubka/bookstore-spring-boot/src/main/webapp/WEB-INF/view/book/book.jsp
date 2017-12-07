@@ -71,7 +71,7 @@
 <form:form action="/book/delete/${books.getId()}" method="post" align="center">
     <input type="submit" value="<spring:message code="book.del"/>">
 </form:form>
-<form:form action="/book/update/${books.getId()}" method="post" align="center">
+<form:form action="/book/change/${books.getId()}" method="get" align="center">
     <input type="submit" value="<spring:message code="book.update"/>">
 </form:form>
 <%--references???--%>
