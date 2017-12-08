@@ -24,7 +24,7 @@ public class BookList {
     private String publisher;
 
     @Column(name = "price")
-    private Integer price;
+    private Double price;
 
     @ManyToMany(cascade = CascadeType.MERGE)
     @LazyCollection(LazyCollectionOption.FALSE)
@@ -50,9 +50,13 @@ public class BookList {
     @LazyCollection(LazyCollectionOption.TRUE)
     private List<OrderList> orderLists;
 
+    @ManyToMany(cascade = CascadeType.MERGE, mappedBy = "books")
+    @LazyCollection(LazyCollectionOption.TRUE)
+    private List<OrderStory> ordersStory;
+
     public BookList(){}
 
-    public BookList(String name, Integer pages, List<Author> authors, List<Genre> genres, String publisher, Integer price) {
+    public BookList(String name, Integer pages, List<Author> authors, List<Genre> genres, String publisher, Double price) {
         this.name = name;
         this.pages = pages;
         this.publisher = publisher;
@@ -61,7 +65,7 @@ public class BookList {
         this.genres = genres;
     }
 
-    public BookList(Long id, String name, Integer pages, List<Author> authors, List<Genre> genres, String publisher, Integer price) {
+    public BookList(Long id, String name, Integer pages, List<Author> authors, List<Genre> genres, String publisher, Double price) {
         this.id = id;
         this.name = name;
         this.pages = pages;
@@ -103,11 +107,11 @@ public class BookList {
         this.publisher = publisher;
     }
 
-    public Integer getPrice() {
+    public Double getPrice() {
         return price;
     }
 
-    public void setPrice(Integer price) {
+    public void setPrice(Double price) {
         this.price = price;
     }
 
@@ -146,5 +150,13 @@ public class BookList {
                 ", authors=" + authors +
                 ", genres=" + genres +
                 '}';
+    }
+
+    public List<OrderStory> getOrdersStory() {
+        return ordersStory;
+    }
+
+    public void setOrdersStory(List<OrderStory> ordersStory) {
+        this.ordersStory = ordersStory;
     }
 }

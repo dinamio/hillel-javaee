@@ -14,6 +14,7 @@ public class OrderDetails {
     @Column(name = "order_details_id")
     private int orderDetailsId;
 
+    @Column(name = "quantity")
     private int quantity;
 
     public int getOrderDetailsId() {

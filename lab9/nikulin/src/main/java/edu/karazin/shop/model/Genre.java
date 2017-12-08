@@ -11,8 +11,10 @@ public class Genre {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "genreid")
     private int genreid;
 
+    @Column(name = "genrename")
     private String genrename;
 
     @ManyToMany

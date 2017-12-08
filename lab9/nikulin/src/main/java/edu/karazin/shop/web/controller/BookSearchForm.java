@@ -1,4 +1,4 @@
-package edu.karazin.shop.web;
+package edu.karazin.shop.web.controller;
 
 public class BookSearchForm {
 

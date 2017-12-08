@@ -1,6 +1,11 @@
 package edu.karazin.shop.model;
 
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
+
 import javax.persistence.*;
+import java.util.Date;
+import java.util.List;
 
 @Entity
 @Table(name = "order_story")
@@ -14,8 +19,21 @@ public class OrderStory {
     @Column(name = "name")
     private String name;
 
+    @Column(name = "sell_date")
+    private Date date;
+
     @Column(name = "description")
     private String description;
+
+    @ManyToMany(cascade = CascadeType.MERGE)
+    @LazyCollection(LazyCollectionOption.FALSE)
+    @JoinTable(name = "books_orders_story",
+            joinColumns =
+                    {@JoinColumn(name = "order_story_id")},
+            inverseJoinColumns =
+                    {@JoinColumn(name = "book_story_id")}
+            )
+    private List<BookList> books;
 
     public Integer getId() {
         return id;
@@ -39,5 +57,21 @@ public class OrderStory {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public Date getDate() {
+        return date;
+    }
+
+    public void setDate(Date date) {
+        this.date = date;
+    }
+
+    public List<BookList> getBooks() {
+        return books;
+    }
+
+    public void setBooks(List<BookList> books) {
+        this.books = books;
     }
 }

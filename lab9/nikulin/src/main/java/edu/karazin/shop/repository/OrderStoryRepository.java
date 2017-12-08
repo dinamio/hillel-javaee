@@ -1,10 +1,10 @@
-package edu.karazin.shop.dao;
+package edu.karazin.shop.repository;
 
 import edu.karazin.shop.model.OrderStory;
 import org.springframework.data.repository.CrudRepository;
 
 import java.util.List;
 
-public interface OrderStoryDataAccessObject extends CrudRepository<OrderStory, Integer> {
+public interface OrderStoryRepository extends CrudRepository<OrderStory, Integer> {
     List<OrderStory> findAllByName(String name);
 }

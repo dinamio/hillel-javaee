@@ -6,7 +6,7 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@ page session="true"%>
+<%@ page session="true" %>
 <!DOCTYPE html>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
@@ -51,9 +51,19 @@
     <div class="header clearfix">
         <nav>
             <ul class="nav nav-pills pull-right">
-                <li role="presentation" class="active"><a href="/books/menu">Home</a></li>
-                <li role="presentation"><a href="/order">Basket</a></li>
-                <li role="presentation"><a href="/profile">Profile</a></li>
+                <li role="presentation" class="active"><a href="/books/show">Home</a></li>
+                <sec:authorize access="isAuthenticated()">
+                    <li role="presentation"><a href="/order">Basket</a></li>
+                    <li role="presentation"><a href="/profile">Profile</a></li>
+                    <li role="presentation"><a href="/logout">Logout</a></li>
+                </sec:authorize>
+                <sec:authorize access="hasRole('ADMIN')">
+                    <li role="presentation"><a href="/admin/menu">Admin menu</a></li>
+                </sec:authorize>
+                <sec:authorize access="isAnonymous()">
+                    <li role="presentation"><a href="/login">Login</a></li>
+                </sec:authorize>
+
             </ul>
         </nav>
         <h3 class="text-muted">Books</h3>
@@ -61,8 +71,12 @@
 
     <form>
         <div class="jumbotron">
-            <p><a class="btn btn-lg btn-success" role="button" type="submit" href="/books/show">Show</a></p>
+            <sec:csrfInput/>
+            <p><a class="btn btn-lg btn-success" role="button" type="submit" href="/books/show">Catalogue</a></p>
             <p><a class="btn btn-lg btn-success" role="button" type="submit" href="/books/add">Add new</a></p>
+            <p><a class="btn btn-lg btn-success" role="button" type="submit" href="/admin">Users</a></p>
+            <p><a class="btn btn-lg btn-success" role="button" type="submit" href="/admin/orders">All Orders Story</a></p>
+
         </div>
     </form>
 
