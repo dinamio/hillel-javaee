@@ -5,6 +5,7 @@ import org.hibernate.annotations.LazyCollectionOption;
 
 import javax.persistence.*;
 import java.util.List;
+import java.util.Objects;
 
 @Entity
 public class OrderDetails {
@@ -44,4 +45,21 @@ public class OrderDetails {
     @ManyToMany(mappedBy = "orderDetails")
     @LazyCollection(LazyCollectionOption.FALSE)
     private List<OrderList> orderList;
+
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        OrderDetails that = (OrderDetails) o;
+        return orderDetailsId == that.orderDetailsId &&
+                quantity == that.quantity &&
+                Objects.equals(orderList, that.orderList);
+    }
+
+    @Override
+    public int hashCode() {
+
+        return Objects.hash(orderDetailsId, quantity, orderList);
+    }
 }

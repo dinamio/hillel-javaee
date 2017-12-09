@@ -1,5 +1,8 @@
 package edu.karazin.shop.model;
 
+/**
+ * Initial genre data.
+ */
 public enum Genres {
     Fantasy,
     Comedy,
