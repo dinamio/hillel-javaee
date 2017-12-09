@@ -50,7 +50,7 @@
 <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script type="text/javascript">
     $('#password, #confirmationPassword').on('onkeyup', function () {
-        if ($('#password').val() == $('#confirmationPassword').val()) {
+        debugger;        if ($('#password').val() == $('#confirmationPassword').val()) {
             $('#message').html('Matching').css('color', 'green');
         } else
             $('#message').html('Not Matching').css('color', 'red');

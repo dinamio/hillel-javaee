@@ -74,4 +74,28 @@ public class OrderStory {
     public void setBooks(List<BookList> books) {
         this.books = books;
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        OrderStory that = (OrderStory) o;
+
+        if (id != null ? !id.equals(that.id) : that.id != null) return false;
+        if (name != null ? !name.equals(that.name) : that.name != null) return false;
+        if (date != null ? !date.equals(that.date) : that.date != null) return false;
+        if (description != null ? !description.equals(that.description) : that.description != null) return false;
+        return books != null ? books.equals(that.books) : that.books == null;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = id != null ? id.hashCode() : 0;
+        result = 31 * result + (name != null ? name.hashCode() : 0);
+        result = 31 * result + (date != null ? date.hashCode() : 0);
+        result = 31 * result + (description != null ? description.hashCode() : 0);
+        result = 31 * result + (books != null ? books.hashCode() : 0);
+        return result;
+    }
 }
