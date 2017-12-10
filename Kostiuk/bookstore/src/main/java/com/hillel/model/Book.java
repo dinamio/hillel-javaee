@@ -1,8 +1,7 @@
 package com.hillel.model;
 
-import lombok.Builder;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
+import org.hibernate.annotations.Cascade;
 
 import javax.persistence.*;
 import java.util.List;
@@ -11,11 +10,9 @@ import java.util.List;
 @Setter
 @Entity
 @Table(name = "books")
+@EqualsAndHashCode
+@NoArgsConstructor
 public class Book {
-
-    public Book() {
-        //NOP
-    }
 
     @Builder
     public Book(String language, String link, int pages, String title, int year, byte[] image, Writer author, List<Writer> reviewers) {
@@ -49,19 +46,19 @@ public class Book {
     private int year;
 
     @Lob
-    @Column(name = "image", nullable = true)
+    @Column(name = "image")
     @Basic(fetch = FetchType.LAZY)
     private byte[] image;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
     @JoinColumn(name = "author_id")
     private Writer author;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
     @JoinColumn(name = "user_id")
     private User user;
 
-    @ManyToMany(fetch = FetchType.LAZY)
+    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
     @JoinTable(name = "book_rev", joinColumns = @JoinColumn(name = "book_id"),
             inverseJoinColumns = @JoinColumn(name = "rev_id"))
     private List<Writer> reviewers;

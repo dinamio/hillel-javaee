@@ -14,6 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
+import org.springframework.util.StringUtils;
 
 import javax.annotation.PostConstruct;
 import javax.servlet.http.Cookie;
@@ -28,8 +29,6 @@ import java.time.ZoneId;
 import java.util.Date;
 import java.util.Optional;
 import java.util.stream.Stream;
-
-import static com.hillel.util.Utils.isValidString;
 
 @Slf4j
 @Component
@@ -70,9 +69,9 @@ public class AuthHelper {
             String password = request.getParameter("password");
             String reCaptchaResponse = request.getParameter("reCaptchaResponse");
 
-            if (isValidString(login)
-                    && isValidString(password)
-                    && isValidString(reCaptchaResponse)
+            if (StringUtils.isEmpty(login)
+                    && StringUtils.isEmpty(password)
+                    && StringUtils.isEmpty(reCaptchaResponse)
                     && reCaptchaVerifier.verify(reCaptchaResponse).isSuccess()) {
 
                 LocalDateTime localDate = LocalDateTime.now().plus(Duration.ofMinutes(Long.parseLong(lifetimeMinutes)));

@@ -2,16 +2,13 @@ package com.hillel.util;
 
 import org.apache.commons.codec.binary.Base64;
 import org.apache.commons.io.IOUtils;
+import org.springframework.util.StringUtils;
 
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.UnsupportedEncodingException;
 
 public class Utils {
-
-    public static boolean isValidString(String value) {
-        return value != null && !value.isEmpty();
-    }
 
     public static byte[] resourceAsBytes(String path) {
         try {
@@ -42,7 +39,10 @@ public class Utils {
 
 
     public static String[] splitOnCommas(String string) {
-        return string.trim().split("[,]");
+        if (!StringUtils.isEmpty(string)) {
+            return string.trim().split("[,]");
+        }
+        return new String[]{};
     }
 
 
