@@ -5,6 +5,7 @@ import com.hillel.security.UserAuthentication;
 import lombok.NoArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
@@ -34,7 +35,7 @@ public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilte
     @Override
     public Authentication attemptAuthentication(HttpServletRequest req,
                                                 HttpServletResponse res) throws AuthenticationException {
-        return authHelper.getLoginAuthentication(req).orElse(null);
+        return authHelper.getLoginAuthentication(req).orElseThrow(() -> new BadCredentialsException("Enter valid credentials!"));
     }
 
     @Override

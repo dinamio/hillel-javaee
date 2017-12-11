@@ -10,6 +10,6 @@ public interface BookDao extends CrudRepository<Book, Long> {
 
 //    Optional<Book> getEagerStateById(@NonNull Long id);
 
-    List<Book> getByTitle(@NonNull String title);
+    List<Book> getByTitleLike(@NonNull String title);
 
 }
