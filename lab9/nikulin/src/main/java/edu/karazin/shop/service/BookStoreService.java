@@ -15,8 +15,6 @@ public interface BookStoreService {
 
     List<BookList> getBookListByGenre(String genre);
 
-    List<BookList> getAllBooks();
-
     BookList getBookById(Long id);
 
     void updateBook(BookList bookList);
@@ -24,4 +22,6 @@ public interface BookStoreService {
     void deleteBook(Long id);
 
     List<String> getGenreNames(String genreName);
+
+    List<String> getGenreNames();
 }

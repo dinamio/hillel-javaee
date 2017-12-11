@@ -5,14 +5,17 @@ import org.hibernate.annotations.LazyCollectionOption;
 
 import javax.persistence.*;
 import java.util.List;
+import java.util.Objects;
 
 @Entity
 public class Genre {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "genreid")
     private int genreid;
 
+    @Column(name = "genrename")
     private String genrename;
 
     @ManyToMany
@@ -52,5 +55,21 @@ public class Genre {
     @Override
     public String toString() {
         return genrename;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Genre genre = (Genre) o;
+        return genreid == genre.genreid &&
+                Objects.equals(genrename, genre.genrename) &&
+                Objects.equals(bookLists, genre.bookLists);
+    }
+
+    @Override
+    public int hashCode() {
+
+        return Objects.hash(genreid, genrename, bookLists);
     }
 }

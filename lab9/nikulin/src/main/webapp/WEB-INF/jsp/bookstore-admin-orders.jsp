@@ -48,6 +48,7 @@
 <body>
 
 <div class="container">
+    <sec:csrfInput/>
     <div class="header clearfix">
         <nav>
             <ul class="nav nav-pills pull-right">
@@ -68,71 +69,23 @@
         <h3 class="text-muted">Books</h3>
     </div>
 
-
-    <div class="jumbotron">
-        <div class="form-group">
-
-            <script type="text/javascript"
-                    src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-            <script type="text/javascript">
-                $(document).ready(function () {
-                    $('#searchText').keyup(function () {
-                        var genre = $('#searchText').val();
-                        console.log(genre);
-                        $.ajax({
-                            type: 'GET',
-                            data: {genre: genre},
-                            url: 'showhints',
-                            success: function (result) {
-                                $('#result1').html(result);
-                                document.getElementById('result1').innerHTML = result;
-                            }
-                        })
-                    })
-                })
-            </script>
-
-            <form:form modelAttribute="searchForm">
-                <form:input path="searchText" name="searchText" id="searchText"
-                            placeholder="Comedy, Tragicomedy, Satire, Horror Fiction, Fantasy, Drama, Mythology, Romance, Manga, Programming,  Scientific, Literary realism"
-                            cssClass="form-control"/>
-                <input type="submit" value="Search" class="btn btn-lg btn-success"/>
-            </form:form>
-            <p id="result1"></p>
-        </div>
-    </div>
-    <sec:csrfInput/>
-
-    <c:forEach items="${products}" var="book">
+    <c:forEach items="${orders}" var="order">
         <div class="jumbotron">
             <h1>
-                    ${book.name}
+                Purchased by: ${order.name}
             </h1>
-            <p><a class="label label-info label-success" href="https://en.wikipedia.org/wiki/${book.name}">Wiki</a></p>
-            <p>Pages: ${book.pages}</p>
-            <p>Publisher: ${book.publisher}</p>
-            <p>Price: ${book.price}</p>
-            <p>Authors:
+            <p>Id: ${order.id}</p>
+            <p>Date: ${order.date}</p>
+            Books:
             <ul>
-                <c:forEach items="${book.authors}" var="author">
-                    <li>${author.name}</li>
+                <c:forEach items="${order.books}" var="book">
+                    <li><a href="https://en.wikipedia.org/wiki/${book.name}">${book.name}</a></li>
                 </c:forEach>
             </ul>
-            </p>
-            <p>Genres:
-            <ul>
-                <c:forEach items="${book.genres}" var="genre">
-                    <li>${genre.genrename}</li>
-                </c:forEach>
-            </ul>
-            </p>
-            <sec:authorize access="hasRole('ADMIN')">
-                <p><a class="btn btn-lg btn-success" role="button" href="/books/${book.id}" type="submit">Edit</a></p>
-                <p><a class="btn btn-lg btn-success" role="button" href="/books/remove/${book.id}"
-                      type="submit">Remove</a></p>
-            </sec:authorize>
-            <p><a class="btn btn-lg btn-success" role="button" href="/order/${book.id}" type="submit">Add to basket</a>
-            </p>
+            <p class=\"lead\"> </p>
+            <p>Description: ${order.description}</p>
+            <p class=\"lead\"> </p>
+            <p>Description: ${order.description}</p>
         </div>
     </c:forEach>
 

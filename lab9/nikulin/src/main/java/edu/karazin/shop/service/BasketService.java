@@ -10,10 +10,6 @@ import java.util.List;
 public interface BasketService {
     OrderList createOrder(User user);
 
-    OrderList getOrder(int id);
-
-    List<OrderList> getAllOrders();
-
     OrderList getOrderByUserId(User user);
 
     OrderList addBookToOrder(User user, BookList bookList);
@@ -25,4 +21,6 @@ public interface BasketService {
     void addOrderToStory(OrderList order);
 
     List<OrderStory> getOrderStory(String name);
+
+    List<OrderStory> getAllOrders();
 }
