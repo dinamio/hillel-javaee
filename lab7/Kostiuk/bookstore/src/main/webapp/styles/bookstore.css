@@ -1,0 +1,15 @@
+#users_table {
+    width: 500px;
+    float: left;
+}
+
+.jumbotron {
+    cursor: pointer;
+}
+
+#table_container {
+    width: 550px;
+    height: 400px;
+    overflow-y: auto;
+    float: right;
+}
