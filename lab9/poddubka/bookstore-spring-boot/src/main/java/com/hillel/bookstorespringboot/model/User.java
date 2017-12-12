@@ -38,6 +38,12 @@ public class User {
         this.userPassword = userPassword;
     }
 
+    public User(String userName, Boolean enable, String role) {
+        this.userName = userName;
+        this.enable = enable;
+        this.role = role;
+    }
+
     public User(String userName, String userPassword, Boolean enable, String role) {
         this.userName = userName;
         this.userPassword = userPassword;

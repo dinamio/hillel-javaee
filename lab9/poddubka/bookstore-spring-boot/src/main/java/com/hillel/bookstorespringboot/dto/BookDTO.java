@@ -1,12 +1,5 @@
 package com.hillel.bookstorespringboot.dto;
 
-import com.hillel.bookstorespringboot.model.Author;
-import org.springframework.stereotype.Repository;
-
-import java.util.ArrayList;
-import java.util.List;
-
-@Repository
 public class BookDTO {
 
     private String id;
@@ -61,12 +54,4 @@ public class BookDTO {
         this.userName = userName;
     }
 
-    public static List<Author> listFromString(String string) {
-            List<Author> list = new ArrayList<>();
-            String[] array = string.split(",");
-            for (int i = 0; i < array.length; i++) {
-                list.add(new Author(array[i]));
-            }
-        return list;
-    }
 }

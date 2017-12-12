@@ -42,9 +42,8 @@ public class WebConfig extends WebMvcConfigurerAdapter{
         registry.addInterceptor(localeChangeInterceptor());
     }
 
-    // Контроллер для Security (Http)
     @Override
     public void addViewControllers(ViewControllerRegistry registry) {
-        registry.addViewController("/login").setViewName("security/login");
+        registry.addViewController("/login").setViewName("login");
     }
 }

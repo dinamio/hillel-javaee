@@ -10,12 +10,14 @@ import com.hillel.bookstorespringboot.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 
 import java.security.Principal;
+import java.util.ArrayList;
 import java.util.List;
-
-import static com.hillel.bookstorespringboot.dto.BookDTO.listFromString;
 
 @Controller
 @RequestMapping("book")
@@ -28,95 +30,93 @@ public class BookController {
     private BookDao bookDao;
 
     @Autowired
-    private BookDTO bookDTO;
-
-    @Autowired
     private UserDao userDao;
 
     @Autowired
-    private AuthorDao authorDao;
+    AuthorDao authorDao;
 
-// +++
-    @RequestMapping(value = "/book", method = RequestMethod.GET)
+    @RequestMapping(value = "", method = RequestMethod.GET)
     public String listBook(Model model) {
         model.addAttribute("books", bookDao.findAll());
         return "/book/listBook";
     }
 
-//+++
-    // TODO: Add UI(зачем?:))
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     public String getBook(Model model, @PathVariable("id") Integer id) {
         model.addAttribute("books", bookDao.findOne(id));
         return "/book/book";
     }
 
-// +++
     @RequestMapping(value = "/addBook", method = RequestMethod.GET)
     public String getAddBookPage(Model model, Principal principal) {
         if(principal == null) {
             return "security/registration";
         }
-        model.addAttribute("book", bookDTO );
+        model.addAttribute("book", new BookDTO() );
         return "book/addBook";
     }
 
-// TODO: org.hibernate.TransientPropertyValueException: object references an unsaved transient instance - save the transient instance before flushing : com.hillel.bookstorespringboot.model.Book.user -> com.hillel.bookstorespringboot.model.User; nested exception is java.lang.IllegalStateException: org.hibernate.TransientPropertyValueException: object references an unsaved transient instance - save the transient instance before flushing : com.hillel.bookstorespringboot.model.Book.user -> com.hillel.bookstorespringboot.model.User
     @RequestMapping(value = "/add", method = RequestMethod.POST)
     public String setAddBook(@ModelAttribute(name = "book") BookDTO bookDTO, Principal principal) {
-
         String bookName = bookDTO.getBookName();
-        List<Author> listAuthors = listFromString(bookDTO.getAuthors());
-
-//        for (Author a: listAuthors) {
-//            if (authorDao.findAuthorsByAuthorName(a.getAuthorName()).isEmpty()) {
-//                authorDao.save(new Author(a.getAuthorName()));
-//            }
-//        }
-
+        List<Author> listAuthors = listFromString(bookDTO);
         User user = userDao.findUserByUserName(principal.getName());
-
         Book book = new Book(bookName, listAuthors, user);//
         bookDao.save(book);
-        return "redirect:/book/book";
+
+        return "redirect:/book";
     }
 
-//+++
     @RequestMapping(value = "/delete/{id}", method = RequestMethod.POST)
-    public String deleteBook(@PathVariable Integer id) {
-        bookDao.delete(id);
-        return "redirect:/book/book";
-    }
+    public String deleteBook(@PathVariable Integer id, Principal principal) {
+        if(principal.getName().equals(bookDao.findOne(id).getUser().getUserName())
+                || principal.getName().equals("admin")) {
+            bookDao.delete(id);
 
+            return "redirect:/book";
+        }
+        return "redirect:/book";
+    }
 
     @RequestMapping(value = "/change/{id}", method = RequestMethod.GET)
-    public String changeBook(@PathVariable Integer id, Model model) {
+    public String changeBook(@PathVariable Integer id, Model model, Principal principal) {
+        if(principal.getName().equals(bookDao.findOne(id).getUser().getUserName())
+                || principal.getName().equals("admin")) {
+            model.addAttribute("book", bookDao.findOne(id));
 
-        model.addAttribute("book", bookDao.findOne(id));
-
-        return "book/update";
+            return "book/update";
+        }
+        return  "redirect:/book";
     }
 
-
-// TODO: Сделать страницу(форму) для редактирования
     @RequestMapping(value = "/update/{id}", method = RequestMethod.POST)
     public String updateBook(@ModelAttribute(name = "bookDTO") BookDTO bookDTO, @PathVariable Integer id, Principal principal) {
         String bookName = bookDTO.getBookName();
-        List<Author> listAuthors = listFromString(bookDTO.getAuthors());
-        User user = userDao.findUserByUserName(principal.getName());
-        Book book = new Book(bookName, listAuthors, user);
-        book.setId(id);
-        bookDao.save(book);
-        return "redirect:/book/book";
+        if(principal.getName().equals(bookDao.findOne(id).getUser().getUserName())
+                || principal.getName().equals("admin")) {
+            List<Author> listAuthors = listFromString(bookDTO);
+            User user = userDao.findUserByUserName(principal.getName());
+            Book book = new Book(bookName, listAuthors, user);
+            book.setId(id);
+            bookDao.save(book);
+
+            return "redirect:/book";
+        }
+        return  "redirect:/book";
     }
 
-//    @PutMapping(value = "/update/{id}")
-//    public String updateBook(@RequestBody Book book, @PathVariable Integer id) {
-//        book.setId(id);
-//        bookDao.save(book);
-//        return "redirect:/book/book";
-//    }
-
-
-
+    private List<Author> listFromString(BookDTO bookDTO) {
+        List<Author> list = new ArrayList<>();
+        String[] array = bookDTO.getAuthors().split(",");
+        for (int i = 0; i < array.length; i++) {
+            String name = array[i].trim();
+            Author author = authorDao.findByAuthorName(name);
+            if(author == null) {
+                list.add(new Author(name));
+            } else {
+                list.add(author);
+            }
+        }
+        return list;
+    }
 }
