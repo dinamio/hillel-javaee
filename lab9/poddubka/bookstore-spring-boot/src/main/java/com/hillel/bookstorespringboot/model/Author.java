@@ -11,14 +11,11 @@ public class Author {
     @GeneratedValue
     private Integer id;
 
-  //  @Column(name = "author_name", nullable = false)
     @Column(name = "author_name")
     private String authorName;
 
-    //////////////////////////////
     @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "authors")
     private List<Book> books;
-    //////////////////////////////
 
     public Author() {
     }
@@ -77,20 +74,12 @@ public class Author {
         return authorName;
     }
 
-    /////////////////////
-//    public List<Author> stringToList() {
-//        String[] list = authorName.split(",");
-//        return (List<Author>) new ArrayList(Arrays.asList(list));
-//    }
-
     public static String listToString(List<Book> books) {
         StringBuilder sb  = new StringBuilder();
         for (Book b: books) {
             sb.append(b.getBookName());
             sb.append(",");
-            //sb.append("\n");
         }
         return sb.toString();
     }
-    /////////////////////
 }

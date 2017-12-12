@@ -16,14 +16,12 @@ public class Book {
     private String bookName;
 
     @ManyToOne(fetch = FetchType.EAGER)
- //   @JoinColumn(name = "user_id", nullable = false)
     @JoinColumn(name = "user_id")
     private User user;
 
     @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinTable(name = "items",
             joinColumns = {@JoinColumn(name = "book_id")},
-  //          inverseJoinColumns = {@JoinColumn(name = "author_id", nullable = false)})
             inverseJoinColumns = {@JoinColumn(name = "author_id")})
     private List<Author> authors;
 
@@ -101,12 +99,6 @@ public class Book {
         return super.equals(obj);
     }
 
-//    @Override
-//    public String toString() {
-//        return id + " " + bookName + " " + user.getUserName() + " " + showAuthors(authors);
-//    }
-
-    /////////////////////
     public String showAuthors(List<Author> authors) {
         StringBuilder sb  = new StringBuilder();
         for (Author a: authors) {
@@ -115,7 +107,6 @@ public class Book {
         }
         return sb.toString();
     }
-    /////////////////////
 
     public String showBooks() {
 

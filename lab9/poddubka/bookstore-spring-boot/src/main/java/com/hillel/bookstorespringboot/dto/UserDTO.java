@@ -1,8 +1,5 @@
 package com.hillel.bookstorespringboot.dto;
 
-import org.springframework.stereotype.Repository;
-
-@Repository
 public class UserDTO {
 
     private String id;
@@ -10,8 +7,6 @@ public class UserDTO {
     private String userPassword;
     private Boolean enable;
     private String role;
- //   private List<Book> books;
-
 
     public UserDTO() {
     }
